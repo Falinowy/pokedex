@@ -1,0 +1,38 @@
+<div *ngIf="cardDetails">
+  <ng-container class="col-1">
+    <div class="header">
+      <p>{{cardDetails.name}}</p>
+    </div>
+    <div class="form-group">
+      <label><img id="imgPokemon" src="{{ cardDetails.images.small }}"><br><hr></label>
+      <label id="artist"> Artist:</label>
+      <input value="{{cardDetails.artist}}"><br><hr>
+      <label id="hp"> Hp:</label>
+      <input value="{{cardDetails.hp}}"><br><hr>
+      <label id="nationalPokedexNumbers"> National Pokedex Numbers:</label>
+      <input value="{{cardDetails.nationalPokedexNumbers}}"><br><hr>
+      <label id="number"> Number:</label>
+      <input value="{{cardDetails.number}}"><br><hr>
+      <label id="rarity"> Rarity:</label>
+      <input value="{{cardDetails.rarity}}"><br><hr>
+      <label id="types"> Types:</label>
+      <input value="{{cardDetails.types}}"><br><hr>
+      <label id="supertype"> Super type:</label>
+      <input value="{{cardDetails.supertype}}"><br><hr>
+    </div>
+  </ng-container>
+</div>
+
+<div *ngIf="similarPokemons">
+  <ng-container class="col-1">
+    <div class="header">
+      <p>{{this.types}} Type Pokemons</p>
+    </div>
+    <div class="form-group">
+        <a class="col-sm-4"*ngFor="let similarPokemon of similarPokemons" routerLink="/cards/{{ similarPokemon.id }}/{{similarPokemon.types}}">
+            <button class="button"(click)="refresh()">{{similarPokemon.name}}</button>
+        </a>
+    </div>
+  </ng-container>
+</div>
+

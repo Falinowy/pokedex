@@ -1,0 +1,42 @@
+.form-group {
+  padding: 2% 15%;
+  text-align: left;
+  display: block;
+  font-size: 30px;
+}
+#imgPokemon {
+  border: 2px solid black;
+  border-radius: 10%;
+}
+#imgPokemon:hover {
+  transform: scale(2);
+}
+.header {
+  padding-top: 10px;
+  text-align: center;
+  color: #a32020;
+  font-weight: bold;
+  font-size: 70px;
+}
+input {
+  font-size: 30px;
+  border:none;
+}
+.button {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  min-height: 100px;
+  min-width: 250px;
+  background-color: #a32020;
+  border-radius: 8px;
+  font-size: 20px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+  color: black;
+}
+[class*="col-"] {
+  float: left;
+  padding: 1%;
+}

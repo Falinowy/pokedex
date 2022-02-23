@@ -1,0 +1,31 @@
+.cards-container {
+  padding: 50px;
+}
+.button {
+  text-align: center;
+  color: rgb(255, 255, 255);
+  min-height: 100px;
+  min-width: 250px;
+  background-color: #a32020;
+  border-radius: 8px;
+  font-size: 20px;
+}
+.button:hover {
+  cursor: pointer;
+  background-color: #ffffff;
+  color: black;
+}
+.header {
+  padding-top: 60px;
+  text-align: center;
+  color: #a32020;
+  font-weight: bold;
+  font-size: 100px;
+}
+pagination-controls {
+  text-align: center;
+}
+[class*="col-"] {
+  float: left;
+  padding: 1%;
+}

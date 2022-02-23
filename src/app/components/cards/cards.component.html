@@ -1,0 +1,11 @@
+<div class="header">
+  <p>List of Pokémon</p>
+</div>
+<div class="row cards-container">
+  <pagination-controls (pageChange)="page= $event; cards =[]; getCards()"></pagination-controls>
+  <a class="col-sm-4"*ngFor="let card of cards | paginate: { itemsPerPage:10, currentPage: page, totalItems: totalCards}" routerLink="/cards/{{ card.id }}/{{card.types}}">
+      <button class="button">{{card.name}}</button>
+  </a>
+</div>
+
+
