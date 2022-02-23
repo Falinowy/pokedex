@@ -7,17 +7,13 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardsDetailComponent } from './components/cards-detail/cards-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgxPaginationModule } from 'ngx-pagination';
-import { TttttttComponent } from './componenttest/ttttttt/ttttttt.component';
-import { TttttttsdfsdComponent } from './componenttttttt/tttttttsdfsd/tttttttsdfsd.component';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardsComponent,
     CardsDetailComponent,
-    HeaderComponent,
-    TttttttComponent,
-    TttttttsdfsdComponent
+    HeaderComponent
   ],
   imports: [
     BrowserModule,
