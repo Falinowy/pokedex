@@ -14,7 +14,7 @@
 .header {
   padding-top: 10px;
   text-align: center;
-  color: #a32020;
+  color: #5793ec;
   font-weight: bold;
   font-size: 70px;
 }
@@ -27,7 +27,6 @@ input {
   color: rgb(255, 255, 255);
   min-height: 100px;
   min-width: 250px;
-  background-color: #a32020;
   border-radius: 8px;
   font-size: 20px;
 }
@@ -39,4 +38,7 @@ input {
 [class*="col-"] {
   float: left;
   padding: 1%;
+}
+.imgHeader {
+  text-align: center;
 }

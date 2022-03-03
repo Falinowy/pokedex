@@ -7,19 +7,23 @@ import { HttpClientModule } from '@angular/common/http';
 import { CardsDetailComponent } from './components/cards-detail/cards-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { NgxPaginationModule } from 'ngx-pagination';
+import { MatButtonModule } from '@angular/material/button';
+import { MatCardModule } from '@angular/material/card';
 
 @NgModule({
   declarations: [
     AppComponent,
     CardsComponent,
     CardsDetailComponent,
-    HeaderComponent
+    HeaderComponent,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule
+    NgxPaginationModule,
+    MatCardModule,
+    MatButtonModule
   ],
   providers: [],
   bootstrap: [AppComponent]

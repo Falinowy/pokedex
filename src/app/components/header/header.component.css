@@ -1,6 +1,6 @@
 header {
   padding: 20px 0px;
-  background-color: #e84118;
+  background-color: #5793ec;
 }
 header h1 {
   padding-left: 40%;
@@ -11,13 +11,12 @@ header h1 {
   text-align: center;
 }
 header button {
+  margin-left: 1%;
   padding: 6px 50px;
   text-align: center;
   display: inline-block;
   font-size: 16px;
   text-align: center;
-  color: rgb(255, 255, 255);
-  background-color: #a32020;
   border-radius: 8px;
   font-size: 20px;
 }

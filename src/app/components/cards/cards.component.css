@@ -1,18 +1,6 @@
-.cards-container {
-  padding: 50px;
-}
-.button {
-  text-align: center;
-  color: rgb(255, 255, 255);
-  min-height: 100px;
-  min-width: 250px;
-  background-color: #a32020;
-  border-radius: 8px;
-  font-size: 20px;
-}
-.button:hover {
+.card:hover {
   cursor: pointer;
-  background-color: #ffffff;
+  background-color: #5793ec;
   color: black;
 }
 .header {
@@ -23,9 +11,13 @@
   font-size: 100px;
 }
 pagination-controls {
+  margin: 5%;
   text-align: center;
 }
-[class*="col-"] {
-  float: left;
-  padding: 1%;
+.card {
+  padding: 2%;
+  max-width: 170px;
+  display: inline-block;
+  margin-left: 6%;
+  margin-top: 5%;
 }

@@ -22,7 +22,7 @@ export class CardsComponent implements OnInit {
   getCards(): void {
     this.cardsSubscription = this.cardsService.getCards(this.page)
       .subscribe(result => {
-        this.totalCards = (result.totalCount / result.pageSize)*10;
+        this.totalCards = (result.totalCount / result.pageSize) * 10;
         this.cards = result.data;
       });
     }
