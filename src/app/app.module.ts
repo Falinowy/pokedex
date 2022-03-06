@@ -9,6 +9,17 @@ import { HeaderComponent } from './components/header/header.component';
 import { NgxPaginationModule } from 'ngx-pagination';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { MatInputModule } from '@angular/material/input';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
+
+const MATERIAL_MODULES = [
+  MatCardModule,
+  MatButtonModule,
+  MatInputModule,
+  MatSnackBarModule
+];
 
 @NgModule({
   declarations: [
@@ -22,8 +33,10 @@ import { MatCardModule } from '@angular/material/card';
     AppRoutingModule,
     HttpClientModule,
     NgxPaginationModule,
-    MatCardModule,
-    MatButtonModule
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MATERIAL_MODULES
   ],
   providers: [],
   bootstrap: [AppComponent]

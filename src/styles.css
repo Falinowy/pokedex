@@ -10,3 +10,8 @@ body {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+.toast-success {
+  background-color: rgb(37, 226, 37);
+  color: rgb(0, 0, 0);
+  font-size:50px
+}
