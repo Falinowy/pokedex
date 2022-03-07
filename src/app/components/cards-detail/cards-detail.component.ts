@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CardsService } from 'src/app/service/cards.service';
@@ -11,7 +11,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
   templateUrl: './cards-detail.component.html',
   styleUrls: ['./cards-detail.component.css']
 })
-export class CardsDetailComponent implements OnInit {
+export class CardsDetailComponent implements OnInit, OnDestroy {
   idCard: string;
   types: string;
   cardDetails: Card;
@@ -20,7 +20,7 @@ export class CardsDetailComponent implements OnInit {
   private similarCardsSubscription: Subscription;
 
   form = new FormGroup({
-    artist: new FormControl('',[Validators.required, Validators.minLength(3)]),
+    artist: new FormControl('', [Validators.required, Validators.minLength(3)]),
     hp: new FormControl('', [Validators.required]),
     nationalPokedexNumbers: new FormControl('', [Validators.required]),
     number: new FormControl('', [Validators.required]),
@@ -51,7 +51,7 @@ export class CardsDetailComponent implements OnInit {
       });
   }
   getCardDetail(): void {
-    this.idCard = this.route.snapshot.params['idCard'];
+    this.idCard = this.route.snapshot.params.idCard;
     this.cardsDetailSubscription = this.cardsService.getCardDetail(this.idCard)
       .subscribe(result => {
         this.cardDetails = result.data;
@@ -59,7 +59,7 @@ export class CardsDetailComponent implements OnInit {
       });
   }
   getSimilarCards(): void {
-    this.types = this.route.snapshot.params['types'];
+    this.types = this.route.snapshot.params.types;
     this.similarCardsSubscription = this.cardsService.getSimilarCards(this.types)
       .subscribe(result => {
         this.similarPokemons = result.data;
@@ -67,8 +67,8 @@ export class CardsDetailComponent implements OnInit {
       });
   }
   refresh(): void {
-    this.idCard = this.route.snapshot.params['idCard'];
-    this.types = this.route.snapshot.params['types'];
+    this.idCard = this.route.snapshot.params.idCard;
+    this.types = this.route.snapshot.params.types;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
 }
   ngOnDestroy(): void {
@@ -78,11 +78,11 @@ export class CardsDetailComponent implements OnInit {
   get valueForm(){
     return this.form.controls;
   }
-  onSubmitCardsDetail(){
+  onSubmitCardsDetail(): void{
     console.log(this.form.value);
     this.onEditSuccess();
   }
-  private onEditSuccess() {
-    this.toast.open('Pokemon has been successfully edited!','', { panelClass: 'toast-success'})
+  private onEditSuccess(): void{
+    this.toast.open('Pokemon has been successfully edited!', '', { panelClass: 'toast-success', duration: 5000});
   }
 }

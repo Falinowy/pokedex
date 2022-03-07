@@ -5,7 +5,7 @@
   </div>
   <mat-form-field class="form-group">
     <mat-label for="artist">Artist:</mat-label>
-    <input matInput formControlName="artist" id="artist" class="form-control" value="{{cardDetails.artist}}">
+    <input matInput formControlName="artist" id="artist" class="form-control"data-cy="artist" value="{{cardDetails.artist}}">
     <div *ngIf="valueForm['artist'].touched && valueForm['artist'].invalid" class="alert alert-danger">
       <div *ngIf="valueForm['artist'].errors && valueForm['artist'].errors['required']">Name is required.</div>
       <div *ngIf="valueForm['artist'].errors && valueForm['artist'].errors['minlength']">Name should be 3 character.</div>
@@ -14,7 +14,7 @@
 
   <mat-form-field class="form-group">
     <mat-label for="hp">Hp</mat-label>
-    <input matInput formControlName="hp" id="hp" class="form-control" value="{{cardDetails.hp}}">
+    <input matInput formControlName="hp" id="hp" class="form-control"data-cy="hp" value="{{cardDetails.hp}}">
     <div *ngIf="valueForm['hp'].touched && valueForm['hp'].invalid" class="alert alert-danger">
       <div *ngIf="valueForm['hp'].errors && valueForm['hp'].errors['required']">Hp is required.</div>
     </div>
@@ -22,7 +22,7 @@
 
   <mat-form-field class="form-group">
     <mat-label for="nationalPokedexNumbers">National Pokedex Numbers:</mat-label>
-    <input matInput formControlName="nationalPokedexNumbers" id="nationalPokedexNumbers" class="form-control" value="{{cardDetails.nationalPokedexNumbers}}">
+    <input matInput formControlName="nationalPokedexNumbers" id="nationalPokedexNumbers" class="form-control"data-cy="nationalPokedexNumbers" value="{{cardDetails.nationalPokedexNumbers}}">
     <div *ngIf="valueForm['nationalPokedexNumbers'].touched && valueForm['nationalPokedexNumbers'].invalid" class="alert alert-danger">
       <div *ngIf="valueForm['nationalPokedexNumbers'].errors && valueForm['nationalPokedexNumbers'].errors['required']">National Pokedex Numbers is required.</div>
     </div>
@@ -30,7 +30,7 @@
 
   <mat-form-field class="form-group">
     <mat-label for="number">Number</mat-label>
-    <input matInput formControlName="number" id="number" type="number" class="form-control" value="{{cardDetails.number}}">
+    <input matInput formControlName="number" id="number" type="number" class="form-control"data-cy="number" value="{{cardDetails.number}}">
     <div *ngIf="valueForm['number'].touched && valueForm['number'].invalid" class="alert alert-danger">
       <div *ngIf="valueForm['number'].errors && valueForm['number'].errors['required']">Number is required.</div>
     </div>
@@ -38,7 +38,7 @@
 
   <mat-form-field class="form-group">
     <mat-label for="rarity">Rarity</mat-label>
-    <input matInput formControlName="rarity" id="rarity" class="form-control" value="{{cardDetails.rarity}}">
+    <input matInput formControlName="rarity" id="rarity" class="form-control"data-cy="rarity" value="{{cardDetails.rarity}}">
     <div *ngIf="valueForm['rarity'].touched && valueForm['rarity'].invalid" class="alert alert-danger">
       <div *ngIf="valueForm['rarity'].errors && valueForm['rarity'].errors['required']">Rarity is required.</div>
     </div>
@@ -46,12 +46,12 @@
 
   <mat-form-field class="form-group">
     <mat-label for="types">Type</mat-label>
-    <input matInput formControlName="types" id="types"class="form-control" value="{{cardDetails.types}}">
+    <input matInput formControlName="types" id="types"class="form-control"data-cy="types" value="{{cardDetails.types}}">
     <div *ngIf="valueForm['types'].touched && valueForm['types'].invalid" class="alert alert-danger">
       <div *ngIf="valueForm['types'].errors && valueForm['types'].errors['required']">Type is required.</div>
     </div>
   </mat-form-field>
-  <button mat-raised-button class="button" color="primary" [disabled]="form.invalid" type="submit">Submit</button>
+  <button mat-raised-button class="button" color="primary"data-cy="submit" [disabled]="form.invalid" type="submit">Submit</button>
 
 
 </form>

@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
 import { CardsService } from 'src/app/service/cards.service';
 import { Subscription } from 'rxjs';
 import { Card } from '../module/card';
@@ -8,7 +8,7 @@ import { Card } from '../module/card';
   templateUrl: './cards.component.html',
   styleUrls: ['./cards.component.css']
 })
-export class CardsComponent implements OnInit {
+export class CardsComponent implements OnInit, OnDestroy {
   private cardsSubscription: Subscription;
   cards: Card;
   page = 1;
