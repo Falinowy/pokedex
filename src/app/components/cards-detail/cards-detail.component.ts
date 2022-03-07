@@ -16,6 +16,7 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   types: string;
   cardDetails: Card;
   similarPokemons: Card;
+  showSpinner = true;
   private cardsDetailSubscription: Subscription;
   private similarCardsSubscription: Subscription;
 
@@ -63,7 +64,7 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
     this.similarCardsSubscription = this.cardsService.getSimilarCards(this.types)
       .subscribe(result => {
         this.similarPokemons = result.data;
-
+        this.showSpinner = false;
       });
   }
   refresh(): void {

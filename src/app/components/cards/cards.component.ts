@@ -13,7 +13,7 @@ export class CardsComponent implements OnInit, OnDestroy {
   cards: Card;
   page = 1;
   totalCards: number;
-
+  showSpinner = true;
   constructor(private cardsService: CardsService) { }
 
   ngOnInit(): void {
@@ -24,6 +24,7 @@ export class CardsComponent implements OnInit, OnDestroy {
       .subscribe(result => {
         this.totalCards = (result.totalCount / result.pageSize) * 10;
         this.cards = result.data;
+        this.showSpinner = false;
       });
     }
   ngOnDestroy(): void {

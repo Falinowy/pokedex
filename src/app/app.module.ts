@@ -13,12 +13,14 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
+import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 
 const MATERIAL_MODULES = [
   MatCardModule,
   MatButtonModule,
   MatInputModule,
-  MatSnackBarModule
+  MatSnackBarModule,
+  MatProgressSpinnerModule
 ];
 
 @NgModule({

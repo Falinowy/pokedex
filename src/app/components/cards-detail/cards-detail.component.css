@@ -50,3 +50,7 @@ input {
   margin-top: 5%;
   max-width: 200px;
 }
+.loading-cards {
+  width: 2em;
+  margin: auto;
+}

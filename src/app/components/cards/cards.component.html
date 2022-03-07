@@ -4,3 +4,6 @@
   </mat-card-header>
   <img mat-card-image src="{{card.images.small}}">
 </mat-card>
+<div class="loading-cards"data-cy="spinner">
+  <mat-spinner *ngIf="showSpinner"></mat-spinner>
+</div>
