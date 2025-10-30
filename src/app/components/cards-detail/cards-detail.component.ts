@@ -3,7 +3,7 @@ import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { CardsService } from 'src/app/service/cards.service';
 import { Card } from '../module/card';
-import { FormGroup, FormControl, Validators} from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
@@ -20,14 +20,14 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   private cardsDetailSubscription: Subscription;
   private similarCardsSubscription: Subscription;
 
-  form = new FormGroup({
-    artist: new FormControl('', [Validators.required, Validators.minLength(3)]),
-    hp: new FormControl('', [Validators.required]),
-    nationalPokedexNumbers: new FormControl('', [Validators.required]),
-    number: new FormControl('', [Validators.required]),
-    rarity: new FormControl('', [Validators.required]),
-    types: new FormControl('', [Validators.required]),
-    superType: new FormControl('', [Validators.required]),
+  form = new UntypedFormGroup({
+    artist: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+    hp: new UntypedFormControl('', [Validators.required]),
+    nationalPokedexNumbers: new UntypedFormControl('', [Validators.required]),
+    number: new UntypedFormControl('', [Validators.required]),
+    rarity: new UntypedFormControl('', [Validators.required]),
+    types: new UntypedFormControl('', [Validators.required]),
+    superType: new UntypedFormControl('', [Validators.required]),
   });
 
   constructor(
