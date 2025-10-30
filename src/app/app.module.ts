@@ -6,7 +6,6 @@ import { CardsComponent } from './components/cards/cards.component';
 import { HttpClientModule } from '@angular/common/http';
 import { CardsDetailComponent } from './components/cards-detail/cards-detail.component';
 import { HeaderComponent } from './components/header/header.component';
-import { NgxPaginationModule } from 'ngx-pagination';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
@@ -34,7 +33,6 @@ const MATERIAL_MODULES = [
     BrowserModule,
     AppRoutingModule,
     HttpClientModule,
-    NgxPaginationModule,
     FormsModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
