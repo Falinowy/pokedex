@@ -3,7 +3,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { CardsComponent } from './components/cards/cards.component';
-import { HttpClientModule } from '@angular/common/http';
+import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
 import { CardsDetailComponent } from './components/cards-detail/cards-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MatButtonModule } from '@angular/material/button';
@@ -22,23 +22,16 @@ const MATERIAL_MODULES = [
   MatProgressSpinnerModule
 ];
 
-@NgModule({
-  declarations: [
-    AppComponent,
-    CardsComponent,
-    CardsDetailComponent,
-    HeaderComponent,
-  ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    HttpClientModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MATERIAL_MODULES
-  ],
-  providers: [],
-  bootstrap: [AppComponent]
-})
+@NgModule({ declarations: [
+        AppComponent,
+        CardsComponent,
+        CardsDetailComponent,
+        HeaderComponent,
+    ],
+    bootstrap: [AppComponent], imports: [BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MATERIAL_MODULES], providers: [provideHttpClient(withInterceptorsFromDi())] })
 export class AppModule { }
