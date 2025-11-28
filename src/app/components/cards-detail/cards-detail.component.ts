@@ -7,9 +7,10 @@ import { UntypedFormGroup, UntypedFormControl, Validators} from '@angular/forms'
 import { MatSnackBar } from '@angular/material/snack-bar';
 
 @Component({
-  selector: 'app-cards-detail',
-  templateUrl: './cards-detail.component.html',
-  styleUrls: ['./cards-detail.component.css']
+    selector: 'app-cards-detail',
+    templateUrl: './cards-detail.component.html',
+    styleUrls: ['./cards-detail.component.css'],
+    standalone: false
 })
 export class CardsDetailComponent implements OnInit, OnDestroy {
   idCard: string;

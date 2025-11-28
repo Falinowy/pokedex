@@ -4,9 +4,10 @@ import { Subscription } from 'rxjs';
 import { Card } from '../module/card';
 
 @Component({
-  selector: 'app-cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.css']
+    selector: 'app-cards',
+    templateUrl: './cards.component.html',
+    styleUrls: ['./cards.component.css'],
+    standalone: false
 })
 export class CardsComponent implements OnInit, OnDestroy {
   private cardsSubscription: Subscription;
