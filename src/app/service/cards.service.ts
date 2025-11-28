@@ -10,7 +10,7 @@ import { environment } from 'src/environments/environment';
 export class CardsService {
 
   constructor(private http: HttpClient) { }
-  private cardsUrl = 'https://api.pokemontcg.io/v2/cards/';
+  private cardsUrl = 'https://api.pokemontcg.io/v2/cards';
 
   getCards(page: number): Observable<Pullcard> {
     const header = { 'X-Api-Key': environment.apiKey };
