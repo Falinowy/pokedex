@@ -1,27 +1,33 @@
-header {
-  padding: 20px 0px;
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
   background-color: #5793ec;
 }
-header h1 {
-  padding-left: 40%;
-  display: inline-block;
-  text-transform: uppercase;
+
+.title {
+  flex: 1;
+  text-align: center;
   color: white;
+  text-transform: uppercase;
   letter-spacing: 3px;
-  text-align: center;
+  margin: 0;
+  font-size: 28px;
 }
-header button {
-  margin-left: 1%;
-  padding: 6px 50px;
-  text-align: center;
-  display: inline-block;
-  font-size: 16px;
-  text-align: center;
+
+.back-button {
+  padding: 6px 40px;
+  font-size: 18px;
   border-radius: 8px;
-  font-size: 20px;
 }
-.button:hover {
+
+.back-button:hover {
   cursor: pointer;
   background-color: #ffffff;
   color: black;
+}
+
+.right-space {
+  width: 120px;
 }

@@ -1,8 +1,9 @@
 import { Injectable } from '@angular/core';
-import { EMPTY, expand, map, Observable, reduce} from 'rxjs';
+import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
 import { Pullcard } from '../components/module/pullcard';
 import { environment } from 'src/environments/environment';
+import { CardResume } from '@tcgdex/sdk';
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +12,15 @@ export class CardsService {
 
   constructor(private http: HttpClient) { }
   private cardsUrl = 'https://api.pokemontcg.io/v2/cards';
+  private cardsTcgdexUrl = 'https://api.tcgdex.net/v2/en/cards'
 
-  getCards(page: number): Observable<Pullcard> {
+  public getAllCardsFromPokemontcg(): Observable<Pullcard> {
     const header = { 'X-Api-Key': environment.apiKey };
+    return this.http.get<Pullcard>(`${this.cardsUrl}` , { headers: header });
+  }
 
-    return this.http.get<Pullcard>(`${this.cardsUrl}?pageSize=10` , { headers: header });
+    public getAllCardsFromTcgdex(): Observable<CardResume> {
+    return this.http.get<CardResume>(`${this.cardsTcgdexUrl}`);
   }
 
   getCardDetail(idCard: string): Observable<Pullcard> {
@@ -33,12 +38,4 @@ export class CardsService {
     return this.http.get<Pullcard>(`${this.cardsUrl}`, { params });
   }
 
-  public getAllCards(): Observable<Pullcard[]> {
-    const pageSize = 250;
-    return this.getCardsPage(1, pageSize).pipe(
-      expand(res => (res.page * res.pageSize < res.count ? this.getCardsPage(res.page + 1, pageSize) : EMPTY)),
-      map(res => res.data),
-      reduce((all, pageData) => all.concat(pageData), [])
-    );
-  }
 }

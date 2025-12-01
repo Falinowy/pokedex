@@ -16,10 +16,9 @@ pagination-controls {
 }
 .card {
   padding: 2%;
-  max-width: 170px;
   display: inline-block;
-  margin-left: 6%;
-  margin-top: 5%;
+  margin: 5%;
+  background-color: #63cceb;
 }
 
 .loading-cards {
@@ -33,4 +32,86 @@ pagination-controls {
   left: 0;
   bottom: 0;
   right: 0;
+}
+.error-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.55);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 999;
+}
+
+.error-box {
+  background: #fff;
+  padding: 32px 40px;
+  border-radius: 14px;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+  max-width: 600px;
+}
+
+.error-box p {
+  font-size: 30px;
+  margin-bottom: 20px;
+  line-height: 1.4;
+}
+.error-box button {
+  font-size: 30px;
+  padding: 30px;
+}
+
+.cards-container {
+  display: flex;
+  flex-direction: column;
+  border-radius: 10rem 10rem 0 0;
+  margin: 4rem;
+  background-color: #fff;
+}
+
+.cards-box {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+  overflow-y: auto;
+  padding-bottom: 16px;
+}
+
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem 2rem 2rem 2rem;
+  margin-top: auto;
+}
+
+.pagination button {
+  background-color: #5793ec;
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 14px 28px;
+  font-size: 18px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: background-color 0.2s, transform 0.1s;
+  min-width: 140px;
+}
+
+.pagination button:hover:not(:disabled) {
+  background-color: #4178d1;
+  transform: scale(1.05);
+}
+
+.pagination button:disabled {
+  background-color: #ccc;
+  color: #888;
+  cursor: not-allowed;
+}
+.pageInfo {
+  align-self: center;
+  font-size: 1.5rem;
 }
