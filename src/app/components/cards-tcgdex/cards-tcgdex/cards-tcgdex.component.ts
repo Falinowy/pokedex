@@ -1,17 +1,17 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
-import { CardsService } from 'src/app/service/cards.service';
 import { Subscription } from 'rxjs';
-import { Card } from '../module/card';
+import { Card } from '../../module/card';
 import TCGdex, { CardResume } from '@tcgdex/sdk';
+import { CardsTcgdexService } from 'src/app/service/tcgdex/cards-tcgdex.service';
 const tcgdex = new TCGdex('en');
 
 @Component({
-  selector: 'app-cards',
-  templateUrl: './cards.component.html',
-  styleUrls: ['./cards.component.css'],
+  selector: 'app-cards-tcgdex',
+  templateUrl: './cards-tcgdex.component.html',
+  styleUrls: ['./cards-tcgdex.component.css'],
   standalone: false,
 })
-export class CardsComponent implements OnInit, OnDestroy {
+export class CardsTcgdexComponent implements OnInit, OnDestroy {
   private cardsSubscription: Subscription;
   private cardsPromise: Promise<any>;
   cards: Card;
@@ -25,34 +25,14 @@ export class CardsComponent implements OnInit, OnDestroy {
   totalCards: number;
   showSpinner = true;
   errorMessage: string;
-  constructor(private cardsService: CardsService) {}
+  constructor(private cardsService: CardsTcgdexService) {}
 
   ngOnInit(): void {
-    // this.getCards();
     this.getCardsFromTCGdex();
   }
   public getCards(): void {
     this.errorMessage = null;
     this.showSpinner = true;
-    this.cardsSubscription = this.cardsService
-      .getAllCardsFromPokemontcg()
-      .subscribe({
-        next: (result) => {
-          this.totalCards = (result.totalCount / result.pageSize) * 10;
-          this.cards = result.data;
-          this.showSpinner = false;
-        },
-        error: (err) => {
-          this.showSpinner = false;
-          if (err.status === 504) {
-            this.errorMessage =
-              'Przekroczono czas oczekiwania na odpowiedź serwera. Proszę spróbować ponownie później.';
-          } else {
-            this.errorMessage =
-              'Wystąpił błąd podczas pobierania danych. Proszę spróbować ponownie później.';
-          }
-        },
-      });
   }
 
 public getCardsFromTCGdex(): void {
@@ -82,37 +62,17 @@ public getCardsFromTCGdex(): void {
 public updatePage(): void {
   const start = this.pageIndex * this.pageSize;
   const end = start + this.pageSize;
-
-  console.log(start + ': start');
-  console.log(end + ': end');
   this.showCardsFromTcgdex = this.allCardsFromTcgdex
     .filter((card) => card.name !== 'Unown' && card.image !== 'undefined/low.png')
     .slice(start, end);
-    console.log(this.showCardsFromTcgdex);
 }
 
-
-  public nextPage(): void {
-    this.pageIndex++;
-    // zabezpieczenie – jeśli wyszedłeś poza zakres, zacznij od nowa
-    if (
-      this.pageIndex * this.cardsPerPage >=
-      this.allCardsFromTcgdex.length
-    ) {
-      this.pageIndex = 0;
-    }
-
-    this.updatePage();
-  }
-
-  public prevPage(): void {
-    if (this.pageIndex > 0) {
-      this.pageIndex--;
-      this.updatePage();
-    }
-  }
+public onPageChange(newPage: number): void {
+  this.pageIndex = newPage;
+  this.updatePage();
+}
 
   ngOnDestroy(): void {
-    this.cardsSubscription.unsubscribe();
+    this.cardsSubscription?.unsubscribe();
   }
 }

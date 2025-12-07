@@ -1,32 +1,26 @@
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient, HttpParams } from '@angular/common/http';
-import { Pullcard } from '../components/module/pullcard';
+import { Pullcard } from '../../components/module/pullcard';
 import { environment } from 'src/environments/environment';
-import { CardResume } from '@tcgdex/sdk';
 
 @Injectable({
   providedIn: 'root'
 })
-export class CardsService {
+export class CardsPokemontcgService {
 
   constructor(private http: HttpClient) { }
   private cardsUrl = 'https://api.pokemontcg.io/v2/cards';
-  private cardsTcgdexUrl = 'https://api.tcgdex.net/v2/en/cards'
 
   public getAllCardsFromPokemontcg(): Observable<Pullcard> {
     const header = { 'X-Api-Key': environment.apiKey };
     return this.http.get<Pullcard>(`${this.cardsUrl}` , { headers: header });
   }
 
-    public getAllCardsFromTcgdex(): Observable<CardResume> {
-    return this.http.get<CardResume>(`${this.cardsTcgdexUrl}`);
-  }
-
-  getCardDetail(idCard: string): Observable<Pullcard> {
+  public getCardDetail(idCard: string): Observable<Pullcard> {
     return this.http.get<Pullcard>(`${this.cardsUrl}/${idCard}`);
   }
-  getSimilarCards(types): Observable<any> {
+  public getSimilarCards(types): Observable<any> {
     return this.http.get<Pullcard>(`${this.cardsUrl}?q=types:${types}`);
   }
 

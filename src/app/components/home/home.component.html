@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="box">
+    <h2 class="title">Wybierz źródło kart</h2>
+    <div class="container-buttons">
+      <button class="btn btn-blue" (click)="selectApi('pokemontcg')">
+        <div class="btn-content">
+          <img
+            src="assets/icons/gengar.png"
+            alt="PokemonTCG API"
+            class="icon"
+          />
+          PokemonTCG API
+        </div>
+      </button>
+
+      <button class="btn btn-green" (click)="selectApi('tcgdex')">
+        <div class="btn-content">
+          <img
+            src="assets/icons/TCGdexIcon.svg"
+            alt="TCGdex API"
+            class="icon"
+          />
+          API
+        </div>
+      </button>
+    </div>
+  </div>
+</div>

@@ -1,18 +1,18 @@
 import { Component, OnDestroy, OnInit } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { Subscription } from 'rxjs';
-import { CardsService } from 'src/app/service/cards.service';
-import { Card } from '../module/card';
+import { Card } from '../../module/card';
 import { UntypedFormGroup, UntypedFormControl, Validators} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { CardsTcgdexService } from 'src/app/service/tcgdex/cards-tcgdex.service';
 
 @Component({
     selector: 'app-cards-detail',
-    templateUrl: './cards-detail.component.html',
-    styleUrls: ['./cards-detail.component.css'],
+    templateUrl: './cards-tcgdex-detail.component.html',
+    styleUrls: ['./cards-tcgdex-detail.component.css'],
     standalone: false
 })
-export class CardsDetailComponent implements OnInit, OnDestroy {
+export class CardsTcgdexDetailComponent implements OnInit, OnDestroy {
   idCard: string;
   types: string;
   cardDetails: Card;
@@ -33,7 +33,7 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
 
   constructor(
     private route: ActivatedRoute,
-    private cardsService: CardsService,
+    private cardsService: CardsTcgdexService,
     private router: Router,
     private toast: MatSnackBar) { }
 
@@ -54,19 +54,10 @@ export class CardsDetailComponent implements OnInit, OnDestroy {
   }
   getCardDetail(): void {
     this.idCard = this.route.snapshot.params.idCard;
-    this.cardsDetailSubscription = this.cardsService.getCardDetail(this.idCard)
-      .subscribe(result => {
-        this.cardDetails = result.data;
-        this.setValueForm();
-      });
+    console.log(this.route);
   }
   getSimilarCards(): void {
     this.types = this.route.snapshot.params.types;
-    this.similarCardsSubscription = this.cardsService.getSimilarCards(this.types)
-      .subscribe(result => {
-        this.similarPokemons = result.data;
-        this.showSpinner = false;
-      });
   }
   refresh(): void {
     this.idCard = this.route.snapshot.params.idCard;

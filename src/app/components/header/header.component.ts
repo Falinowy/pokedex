@@ -13,7 +13,12 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   goBack(): void {
     this.location.back();
+  }
+
+  isHomePage(): boolean {
+    return this.location.path() === '/home';
   }
 }

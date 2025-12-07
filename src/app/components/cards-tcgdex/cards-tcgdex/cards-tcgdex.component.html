@@ -12,7 +12,7 @@
 
 <div class="cards-container">
   <div class="cards-box">
-    <mat-card class="card" *ngFor="let cardFromTcgdex of showCardsFromTcgdex">
+    <mat-card class="card" *ngFor="let cardFromTcgdex of showCardsFromTcgdex" routerLink="/cards/{{ cardFromTcgdex.id }}">
       <mat-card-header>
         <mat-card-title class="title-card">{{
           cardFromTcgdex.name
@@ -23,20 +23,12 @@
       }
     </mat-card>
   </div>
-  <div class="pagination">
-  <button (click)="prevPage()" [disabled]="pageIndex === 0">
-    ← Poprzednie
-  </button>
-
-  <span class="pageInfo">Strona {{ pageIndex + 1 }}</span>
-
-  <button
-    (click)="nextPage()"
-    [disabled]="(pageIndex + 1) * pageSize >= totalCards"
-  >
-    Następne →
-  </button>
-</div>
+<app-action-bar
+      [pageIndex]="pageIndex"
+      [pageSize]="pageSize"
+      [totalItems]="allCardsFromTcgdex?.length || 0"
+      (pageChange)="onPageChange($event)"
+    ></app-action-bar>
 </div>
   <div class="loading-cards" data-cy="spinner">
     <mat-spinner *ngIf="showSpinner"></mat-spinner>

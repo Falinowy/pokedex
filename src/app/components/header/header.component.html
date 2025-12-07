@@ -1,14 +1,12 @@
 <header class="header">
   <button
-    mat-raised-button
-    class="back-button"
-    color="primary"
+    class="btn btn-blue back-button"
     (click)="goBack()"
+    [disabled]="isHomePage()"
     data-cy="back"
   >
-    BACK
+    <div class="btn-content">← Back</div>
   </button>
-
   <h1 class="title">Pokedex</h1>
 
   <!-- Puste miejsce, żeby h1 naprawdę było na środku -->

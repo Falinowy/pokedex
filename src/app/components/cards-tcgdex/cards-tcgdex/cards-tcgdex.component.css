@@ -15,9 +15,9 @@ pagination-controls {
   text-align: center;
 }
 .card {
-  padding: 2%;
+  padding: 0rem 0.3rem 0.3rem 0.3rem;
   display: inline-block;
-  margin: 5%;
+  margin: 1rem;
   background-color: #63cceb;
 }
 
@@ -68,7 +68,6 @@ pagination-controls {
 .cards-container {
   display: flex;
   flex-direction: column;
-  border-radius: 10rem 10rem 0 0;
   margin: 4rem;
   background-color: #fff;
 }

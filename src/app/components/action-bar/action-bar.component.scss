@@ -1,0 +1,30 @@
+.pagination {
+  display: flex;
+  justify-content: space-between;
+  padding: 0rem 2rem 2rem 2rem;
+  margin-top: auto;
+
+  & button {
+    background-color: #5793ec;
+    color: white;
+    border: none;
+    border-radius: 12px;
+    padding: 14px 28px;
+    font-size: 18px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: background-color 0.2s, transform 0.1s;
+    width: 13%;
+  }
+
+  & button:hover:not(:disabled) {
+    background-color: #4178d1;
+    transform: scale(1.05);
+  }
+
+  & button:disabled {
+    background-color: #ccc;
+    color: #888;
+    cursor: not-allowed;
+  }
+}

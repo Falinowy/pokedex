@@ -2,9 +2,12 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { CardsComponent } from './components/cards/cards.component';
-import { provideHttpClient, withInterceptorsFromDi } from '@angular/common/http';
-import { CardsDetailComponent } from './components/cards-detail/cards-detail.component';
+import { CardsPokemontcgComponent } from './components/cards-pokemontcg/cards-pokemontcg/cards-pokemontcg.component';
+import {
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
+import { CardsPokemontcgDetailComponent } from './components/cards-pokemontcg/cards-pokemontcg-detail/cards-pokemontcg-detail.component';
 import { HeaderComponent } from './components/header/header.component';
 import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
@@ -12,26 +15,38 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
-import {MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
+import { ActionBarComponent } from './components/action-bar/action-bar.component';
+import { CardsTcgdexComponent } from './components/cards-tcgdex/cards-tcgdex/cards-tcgdex.component';
+import { CardsTcgdexDetailComponent } from './components/cards-tcgdex/cards-tcgdex-detail/cards-tcgdex-detail.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
   MatButtonModule,
   MatInputModule,
   MatSnackBarModule,
-  MatProgressSpinnerModule
+  MatProgressSpinnerModule,
 ];
 
-@NgModule({ declarations: [
-        AppComponent,
-        CardsComponent,
-        CardsDetailComponent,
-        HeaderComponent,
-    ],
-    bootstrap: [AppComponent], imports: [BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MATERIAL_MODULES], providers: [provideHttpClient(withInterceptorsFromDi())] })
-export class AppModule { }
+@NgModule({
+  declarations: [
+    AppComponent,
+    CardsPokemontcgComponent,
+    CardsPokemontcgDetailComponent,
+    CardsTcgdexComponent,
+    CardsTcgdexDetailComponent,
+    HeaderComponent,
+    ActionBarComponent,
+  ],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    BrowserAnimationsModule,
+    MATERIAL_MODULES,
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
+})
+export class AppModule {}

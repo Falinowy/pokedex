@@ -1,0 +1,15 @@
+  <div class="pagination">
+  <button class="btn btn-green" (click)="prevPage()" [disabled]="isPageIndexZero()">
+    ← Poprzednie
+  </button>
+
+  <span class="pageInfo">Strona {{ getPageNumber() }}</span>
+
+  <button
+    class="btn btn-blue"
+    (click)="nextPage()"
+    [disabled]="isDisabledNext()"
+  >
+    Następne →
+  </button>
+</div>
