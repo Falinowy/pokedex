@@ -1,81 +1,98 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
-import { ActivatedRoute, Router } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Card } from '../../module/card';
-import { UntypedFormGroup, UntypedFormControl, Validators} from '@angular/forms';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute } from '@angular/router';
+
+import {
+  UntypedFormGroup,
+  UntypedFormControl,
+  Validators,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CardsTcgdexService } from 'src/app/service/tcgdex/cards-tcgdex.service';
+import TCGdex, { Card, CardResume, SerieResume } from '@tcgdex/sdk';
+
+const tcgdex = new TCGdex('en');
 
 @Component({
-    selector: 'app-cards-detail',
-    templateUrl: './cards-tcgdex-detail.component.html',
-    styleUrls: ['./cards-tcgdex-detail.component.css'],
-    standalone: false
+  selector: 'app-cards-detail',
+  templateUrl: './cards-tcgdex-detail.component.html',
+  styleUrls: ['./cards-tcgdex-detail.component.css'],
+  standalone: false,
 })
-export class CardsTcgdexDetailComponent implements OnInit, OnDestroy {
-  idCard: string;
-  types: string;
-  cardDetails: Card;
-  similarPokemons: Card;
-  showSpinner = true;
-  private cardsDetailSubscription: Subscription;
-  private similarCardsSubscription: Subscription;
+export class CardsTcgdexDetailComponent implements OnInit {
+  public idCard: string;
+  public cardDetails: Card;
+  public lowQualityWebp: string;
+  public similarCards: CardResume[];
+  public showSpinner = true;
+  public set: SerieResume;
 
   form = new UntypedFormGroup({
-    artist: new UntypedFormControl('', [Validators.required, Validators.minLength(3)]),
+    illustrator: new UntypedFormControl('', [
+      Validators.required,
+      Validators.minLength(3),
+    ]),
     hp: new UntypedFormControl('', [Validators.required]),
-    nationalPokedexNumbers: new UntypedFormControl('', [Validators.required]),
-    number: new UntypedFormControl('', [Validators.required]),
+    dexId: new UntypedFormControl('', [Validators.required]),
+    name: new UntypedFormControl('', [Validators.required]),
     rarity: new UntypedFormControl('', [Validators.required]),
     types: new UntypedFormControl('', [Validators.required]),
-    superType: new UntypedFormControl('', [Validators.required]),
   });
 
-  constructor(
-    private route: ActivatedRoute,
-    private cardsService: CardsTcgdexService,
-    private router: Router,
-    private toast: MatSnackBar) { }
+  constructor(private route: ActivatedRoute, private toast: MatSnackBar) {}
 
-  ngOnInit(): void {
-    this.getCardDetail();
-    this.getSimilarCards();
+  public ngOnInit(): void {
+    this.route.paramMap.subscribe((params) => {
+      const id = params.get('idCard');
+      if (id) {
+        this.getCardDetail();
+      }
+    });
   }
-  setValueForm(): void {
-      this.form.setValue({
-        artist: this.cardDetails.artist,
-        hp: this.cardDetails.hp,
-        nationalPokedexNumbers: this.cardDetails.nationalPokedexNumbers,
-        number: this.cardDetails.number,
-        rarity: this.cardDetails.rarity,
-        types: this.cardDetails.types,
-        superType: this.cardDetails.supertype
-      });
+
+  public setValueForm(): void {
+    this.form.setValue({
+      illustrator: this.cardDetails.illustrator,
+      hp: this.cardDetails.hp,
+      dexId: this.cardDetails.dexId ? this.cardDetails.dexId[0] : '',
+      rarity: this.cardDetails.rarity,
+      types: this.cardDetails.types,
+      name: this.cardDetails.name,
+    });
   }
-  getCardDetail(): void {
+
+  public getCardDetail(): void {
     this.idCard = this.route.snapshot.params.idCard;
-    console.log(this.route);
+    (async () => {
+      const card = await tcgdex.card.get(this.idCard);
+      const set = await tcgdex.set.get(card.set.id);
+      this.similarCards = set.cards;
+      this.cardDetails = card;
+      this.lowQualityWebp = this.getImageURL('low', 'webp', card);
+      this.setValueForm();
+      this.showSpinner = false;
+    })();
   }
-  getSimilarCards(): void {
-    this.types = this.route.snapshot.params.types;
+
+  public getImageURL(
+    size: 'low' | 'high',
+    format: 'png' | 'webp',
+    set: any
+  ): string {
+    return set.getImageURL(size, format);
   }
-  refresh(): void {
-    this.idCard = this.route.snapshot.params.idCard;
-    this.types = this.route.snapshot.params.types;
-    this.router.routeReuseStrategy.shouldReuseRoute = () => false;
-}
-  ngOnDestroy(): void {
-    this.cardsDetailSubscription.unsubscribe();
-    this.similarCardsSubscription.unsubscribe();
-  }
-  get valueForm(){
+
+  get valueForm() {
     return this.form.controls;
   }
-  onSubmitCardsDetail(): void{
+
+  public onSubmitCardsDetail(): void {
     console.log(this.form.value);
     this.onEditSuccess();
   }
-  private onEditSuccess(): void{
-    this.toast.open('Pokemon has been successfully edited!', '', { panelClass: 'toast-success', duration: 5000});
+
+  private onEditSuccess(): void {
+    this.toast.open('Pokemon has been successfully edited!', '', {
+      panelClass: 'toast-success',
+      duration: 5000,
+    });
   }
 }

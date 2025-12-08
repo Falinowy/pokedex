@@ -10,26 +10,30 @@
     <img mat-card-image src="{{ card.images.small }}" />
   </mat-card>
 
-<div class="cards-container">
-  <div class="cards-box">
-    <mat-card class="card" *ngFor="let cardFromTcgdex of showCardsFromTcgdex" routerLink="/cards/{{ cardFromTcgdex.id }}">
-      <mat-card-header>
-        <mat-card-title class="title-card">{{
-          cardFromTcgdex.name
-        }}</mat-card-title>
-      </mat-card-header>
-      @if(cardFromTcgdex.image) {
-      <img mat-card-image src="{{ cardFromTcgdex.image }}" />
-      }
-    </mat-card>
-  </div>
-<app-action-bar
+  <div class="cards-container">
+    <div class="cards-box">
+      <mat-card
+        class="card"
+        *ngFor="let cardFromTcgdex of showCardsFromTcgdex"
+        routerLink="/cards/tcgdex/{{ cardFromTcgdex.id }}"
+      >
+        <mat-card-header>
+          <mat-card-title class="title-card">{{
+            cardFromTcgdex.name
+          }}</mat-card-title>
+        </mat-card-header>
+        @if(cardFromTcgdex.image) {
+        <img mat-card-image src="{{ cardFromTcgdex.image }}" />
+        }
+      </mat-card>
+    </div>
+    <app-action-bar
       [pageIndex]="pageIndex"
       [pageSize]="pageSize"
       [totalItems]="allCardsFromTcgdex?.length || 0"
       (pageChange)="onPageChange($event)"
     ></app-action-bar>
-</div>
+  </div>
   <div class="loading-cards" data-cy="spinner">
     <mat-spinner *ngIf="showSpinner"></mat-spinner>
   </div>
@@ -44,4 +48,3 @@
   </div>
   }
 </body>
-
