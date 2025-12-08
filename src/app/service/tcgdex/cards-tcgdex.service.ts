@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { Observable } from 'rxjs';
 import { HttpClient } from '@angular/common/http';
 import { CardResume } from '@tcgdex/sdk';
@@ -7,7 +7,8 @@ import { CardResume } from '@tcgdex/sdk';
   providedIn: 'root',
 })
 export class CardsTcgdexService {
-  constructor(private http: HttpClient) {}
+  private http = inject(HttpClient);
+
   private cardsTcgdexUrl = 'https://api.tcgdex.net/v2/en/cards';
 
   public getAllCardsFromTcgdex(): Observable<CardResume> {

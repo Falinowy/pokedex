@@ -29,24 +29,22 @@ const MATERIAL_MODULES = [
 ];
 
 @NgModule({
-  declarations: [
-    AppComponent,
-    CardsPokemontcgComponent,
-    CardsPokemontcgDetailComponent,
-    CardsTcgdexComponent,
-    CardsTcgdexDetailComponent,
-    HeaderComponent,
-    ActionBarComponent,
-  ],
-  bootstrap: [AppComponent],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    ReactiveFormsModule,
-    BrowserAnimationsModule,
-    MATERIAL_MODULES,
-  ],
-  providers: [provideHttpClient(withInterceptorsFromDi())],
+    declarations: [AppComponent],
+    bootstrap: [AppComponent],
+    imports: [
+        BrowserModule,
+        AppRoutingModule,
+        FormsModule,
+        ReactiveFormsModule,
+        BrowserAnimationsModule,
+        MATERIAL_MODULES,
+        CardsPokemontcgComponent,
+        CardsPokemontcgDetailComponent,
+        CardsTcgdexComponent,
+        CardsTcgdexDetailComponent,
+        HeaderComponent,
+        ActionBarComponent,
+    ],
+    providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

@@ -1,22 +1,17 @@
 <body>
-  <mat-card
-    class="card"
-    *ngFor="let card of cards"
-    routerLink="/cards/{{ card.id }}/{{ card.types }}"
-  >
+  @for (card of cards; track card.id) {
+  <mat-card class="card" routerLink="/cards/{{ card.id }}/{{ card.types }}">
     <mat-card-header>
       <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
     </mat-card-header>
     <img mat-card-image src="{{ card.images.small }}" />
   </mat-card>
+  }
 
   <div class="cards-container">
     <div class="cards-box">
-      <mat-card
-        class="card"
-        *ngFor="let cardFromTcgdex of showCardsFromTcgdex"
-        routerLink="/cards/tcgdex/{{ cardFromTcgdex.id }}"
-      >
+      @for (cardFromTcgdex of showCardsFromTcgdex; track cardFromTcgdex) {
+      <mat-card class="card" routerLink="/cards/tcgdex/{{ cardFromTcgdex.id }}">
         <mat-card-header>
           <mat-card-title class="title-card">{{
             cardFromTcgdex.name
@@ -26,6 +21,7 @@
         <img mat-card-image src="{{ cardFromTcgdex.image }}" />
         }
       </mat-card>
+      }
     </div>
     <app-action-bar
       [pageIndex]="pageIndex"
@@ -35,7 +31,9 @@
     ></app-action-bar>
   </div>
   <div class="loading-cards" data-cy="spinner">
-    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+    @if (showSpinner) {
+    <mat-spinner></mat-spinner>
+    }
   </div>
   @if (errorMessage) {
   <div class="error-overlay">

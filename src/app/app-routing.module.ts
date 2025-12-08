@@ -1,21 +1,21 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { CardsPokemontcgDetailComponent } from './components/cards-pokemontcg/cards-pokemontcg-detail/cards-pokemontcg-detail.component';
-import { CardsPokemontcgComponent } from './components/cards-pokemontcg/cards-pokemontcg/cards-pokemontcg.component';
-import { CardsTcgdexComponent } from './components/cards-tcgdex/cards-tcgdex/cards-tcgdex.component';
+
+
+
 import { HomeComponent } from './components/home/home.component';
-import { CardsTcgdexDetailComponent } from './components/cards-tcgdex/cards-tcgdex-detail/cards-tcgdex-detail.component';
+
 
 const routes: Routes = [
   { path: '', redirectTo: 'home', pathMatch: 'full' },
   { path: 'home', component: HomeComponent },
   {
     path: 'cards/pokemontcg/:idCard/:types',
-    component: CardsPokemontcgDetailComponent,
+    loadComponent: () => import('./components/cards-pokemontcg/cards-pokemontcg-detail/cards-pokemontcg-detail.component').then(m => m.CardsPokemontcgDetailComponent),
   },
-  { path: 'cards/pokemontcg', component: CardsPokemontcgComponent },
-  { path: 'cards/tcgdex', component: CardsTcgdexComponent },
-  { path: 'cards/tcgdex/:idCard', component: CardsTcgdexDetailComponent },
+  { path: 'cards/pokemontcg', loadComponent: () => import('./components/cards-pokemontcg/cards-pokemontcg/cards-pokemontcg.component').then(m => m.CardsPokemontcgComponent) },
+  { path: 'cards/tcgdex', loadComponent: () => import('./components/cards-tcgdex/cards-tcgdex/cards-tcgdex.component').then(m => m.CardsTcgdexComponent) },
+  { path: 'cards/tcgdex/:idCard', loadComponent: () => import('./components/cards-tcgdex/cards-tcgdex-detail/cards-tcgdex-detail.component').then(m => m.CardsTcgdexDetailComponent) },
   { path: '**', redirectTo: '/home' },
 ];
 

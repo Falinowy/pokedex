@@ -8,8 +8,8 @@ describe('CardsPokemontcgDetailComponent', () => {
 
   beforeEach(async () => {
     await TestBed.configureTestingModule({
-      declarations: [ CardsPokemontcgDetailComponent ]
-    })
+    imports: [CardsPokemontcgDetailComponent]
+})
     .compileComponents();
   });
 

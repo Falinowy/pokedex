@@ -5,200 +5,213 @@
     </div>
   </div>
   <div class="right-panel">
-    <form
-      class="form-container"
-      [formGroup]="form"
-      (ngSubmit)="onSubmitCardsDetail()"
-      *ngIf="cardDetails"
-    >
-      <mat-form-field class="full-width">
-        <mat-label for="illustrator">Illustrator:</mat-label>
-        <input
-          matInput
-          formControlName="illustrator"
-          id="illustrator"
-          class="form-control"
-          data-cy="illustrator"
-          value="{{ cardDetails.illustrator }}"
-        />
-        <div
-          *ngIf="
-            valueForm['illustrator'].touched && valueForm['illustrator'].invalid
-          "
-          class="alert alert-danger"
+    @if (cardDetails) {
+      <form
+        class="form-container"
+        [formGroup]="form"
+        (ngSubmit)="onSubmitCardsDetail()"
         >
-          <div
-            *ngIf="
-              valueForm['illustrator'].errors &&
-              valueForm['illustrator'].errors['required']
-            "
-          >
-            Name is required.
-          </div>
-          <div
-            *ngIf="
-              valueForm['illustrator'].errors &&
-              valueForm['illustrator'].errors['minlength']
-            "
-          >
-            Name should be 3 character.
-          </div>
-        </div>
-      </mat-form-field>
+        <mat-form-field class="full-width">
+          <mat-label for="illustrator">Illustrator:</mat-label>
+          <input
+            matInput
+            formControlName="illustrator"
+            id="illustrator"
+            class="form-control"
+            data-cy="illustrator"
+            value="{{ cardDetails.illustrator }}"
+            />
+            @if (
+              valueForm['illustrator'].touched && valueForm['illustrator'].invalid
+              ) {
+              <div
+                class="alert alert-danger"
+                >
+                @if (
+                  valueForm['illustrator'].errors &&
+                  valueForm['illustrator'].errors['required']
+                  ) {
+                  <div
+                    >
+                    Name is required.
+                  </div>
+                }
+                @if (
+                  valueForm['illustrator'].errors &&
+                  valueForm['illustrator'].errors['minlength']
+                  ) {
+                  <div
+                    >
+                    Name should be 3 character.
+                  </div>
+                }
+              </div>
+            }
+          </mat-form-field>
+          <mat-form-field class="full-width">
+            <mat-label for="hp">Hp</mat-label>
+            <input
+              matInput
+              formControlName="hp"
+              id="hp"
+              class="form-control"
+              data-cy="hp"
+              value="{{ cardDetails.hp }}"
+              />
+              @if (valueForm['hp'].touched && valueForm['hp'].invalid) {
+                <div
+                  class="alert alert-danger"
+                  >
+                  @if (valueForm['hp'].errors && valueForm['hp'].errors['required']) {
+                    <div
+                      >
+                      Hp is required.
+                    </div>
+                  }
+                </div>
+              }
+            </mat-form-field>
+            <mat-form-field class="full-width">
+              <mat-label for="dexId">Dex number:</mat-label>
+              <input
+                matInput
+                formControlName="dexId"
+                id="dexId"
+                class="form-control"
+                data-cy="dexId"
+                value="{{ cardDetails.dexId }}"
+                />
+                @if (valueForm['dexId'].touched && valueForm['dexId'].invalid) {
+                  <div
+                    class="alert alert-danger"
+                    >
+                    @if (
+                      valueForm['dexId'].errors && valueForm['dexId'].errors['required']
+                      ) {
+                      <div
+                        >
+                        National Pokedex Numbers is required.
+                      </div>
+                    }
+                  </div>
+                }
+              </mat-form-field>
+              <mat-form-field class="full-width">
+                <mat-label for="name">Name</mat-label>
+                <input
+                  matInput
+                  formControlName="name"
+                  id="name"
+                  type="text"
+                  class="form-control"
+                  data-cy="name"
+                  value="{{ cardDetails.name }}"
+                  />
+                  @if (valueForm['name'].touched && valueForm['name'].invalid) {
+                    <div
+                      class="alert alert-danger"
+                      >
+                      @if (
+                        valueForm['name'].errors && valueForm['name'].errors['required']
+                        ) {
+                        <div
+                          >
+                          Name is required.
+                        </div>
+                      }
+                    </div>
+                  }
+                </mat-form-field>
+                <mat-form-field class="full-width">
+                  <mat-label for="rarity">Rarity</mat-label>
+                  <input
+                    matInput
+                    formControlName="rarity"
+                    id="rarity"
+                    class="form-control"
+                    data-cy="rarity"
+                    value="{{ cardDetails.rarity }}"
+                    />
+                    @if (valueForm['rarity'].touched && valueForm['rarity'].invalid) {
+                      <div
+                        class="alert alert-danger"
+                        >
+                        @if (
+                          valueForm['rarity'].errors &&
+                          valueForm['rarity'].errors['required']
+                          ) {
+                          <div
+                            >
+                            Rarity is required.
+                          </div>
+                        }
+                      </div>
+                    }
+                  </mat-form-field>
+                  <mat-form-field class="full-width">
+                    <mat-label for="types">Type</mat-label>
+                    <input
+                      matInput
+                      formControlName="types"
+                      id="types"
+                      class="form-control"
+                      data-cy="types"
+                      value="{{ cardDetails.types }}"
+                      />
+                      @if (valueForm['types'].touched && valueForm['types'].invalid) {
+                        <div
+                          class="alert alert-danger"
+                          >
+                          @if (
+                            valueForm['types'].errors && valueForm['types'].errors['required']
+                            ) {
+                            <div
+                              >
+                              Type is required.
+                            </div>
+                          }
+                        </div>
+                      }
+                    </mat-form-field>
+                    <button
+                      mat-raised-button
+                      class="button"
+                      color="primary"
+                      data-cy="submit"
+                      [disabled]="form.invalid"
+                      type="submit"
+                      >
+                      Submit
+                    </button>
+                  </form>
+                }
+              </div>
+            </mat-card>
+            <div class="details-container">
+              @if (similarCards?.length) {
+                <mat-card class="similar-wrapper">
+                  <h2 class="section-title">More {{ cardDetails.set.name }} Cards</h2>
+                  <div class="similar-grid">
+                    @for (card of similarCards; track card) {
+                      <a
+                        class="similar-card"
+                        [routerLink]="'/cards/tcgdex/' + card.id"
+                        >
+                        <img
+                          class="similar-img"
+                          [src]="getImageURL('low', 'webp', card)"
+                          [alt]="card.name"
+                          />
+                          <p class="similar-name">{{ card.name }}</p>
+                        </a>
+                      }
+                    </div>
+                  </mat-card>
+                }
+              </div>
 
-      <mat-form-field class="full-width">
-        <mat-label for="hp">Hp</mat-label>
-        <input
-          matInput
-          formControlName="hp"
-          id="hp"
-          class="form-control"
-          data-cy="hp"
-          value="{{ cardDetails.hp }}"
-        />
-        <div
-          *ngIf="valueForm['hp'].touched && valueForm['hp'].invalid"
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf="valueForm['hp'].errors && valueForm['hp'].errors['required']"
-          >
-            Hp is required.
-          </div>
-        </div>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label for="dexId">Dex number:</mat-label>
-        <input
-          matInput
-          formControlName="dexId"
-          id="dexId"
-          class="form-control"
-          data-cy="dexId"
-          value="{{ cardDetails.dexId }}"
-        />
-        <div
-          *ngIf="valueForm['dexId'].touched && valueForm['dexId'].invalid"
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf="
-              valueForm['dexId'].errors && valueForm['dexId'].errors['required']
-            "
-          >
-            National Pokedex Numbers is required.
-          </div>
-        </div>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label for="name">Name</mat-label>
-        <input
-          matInput
-          formControlName="name"
-          id="name"
-          type="text"
-          class="form-control"
-          data-cy="name"
-          value="{{ cardDetails.name }}"
-        />
-        <div
-          *ngIf="valueForm['name'].touched && valueForm['name'].invalid"
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf="
-              valueForm['name'].errors && valueForm['name'].errors['required']
-            "
-          >
-            Name is required.
-          </div>
-        </div>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label for="rarity">Rarity</mat-label>
-        <input
-          matInput
-          formControlName="rarity"
-          id="rarity"
-          class="form-control"
-          data-cy="rarity"
-          value="{{ cardDetails.rarity }}"
-        />
-        <div
-          *ngIf="valueForm['rarity'].touched && valueForm['rarity'].invalid"
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf="
-              valueForm['rarity'].errors &&
-              valueForm['rarity'].errors['required']
-            "
-          >
-            Rarity is required.
-          </div>
-        </div>
-      </mat-form-field>
-
-      <mat-form-field class="full-width">
-        <mat-label for="types">Type</mat-label>
-        <input
-          matInput
-          formControlName="types"
-          id="types"
-          class="form-control"
-          data-cy="types"
-          value="{{ cardDetails.types }}"
-        />
-        <div
-          *ngIf="valueForm['types'].touched && valueForm['types'].invalid"
-          class="alert alert-danger"
-        >
-          <div
-            *ngIf="
-              valueForm['types'].errors && valueForm['types'].errors['required']
-            "
-          >
-            Type is required.
-          </div>
-        </div>
-      </mat-form-field>
-      <button
-        mat-raised-button
-        class="button"
-        color="primary"
-        data-cy="submit"
-        [disabled]="form.invalid"
-        type="submit"
-      >
-        Submit
-      </button>
-    </form>
-  </div>
-</mat-card>
-<div class="details-container">
-  <mat-card class="similar-wrapper" *ngIf="similarCards?.length">
-    <h2 class="section-title">More {{ cardDetails.set.name }} Cards</h2>
-
-    <div class="similar-grid">
-      <a
-        *ngFor="let card of similarCards"
-        class="similar-card"
-        [routerLink]="'/cards/tcgdex/' + card.id"
-      >
-        <img
-          class="similar-img"
-          [src]="getImageURL('low', 'webp', card)"
-          [alt]="card.name"
-        />
-        <p class="similar-name">{{ card.name }}</p>
-      </a>
-    </div>
-  </mat-card>
-</div>
-
-<div class="loading-cards">
-  <mat-spinner *ngIf="showSpinner"></mat-spinner>
-</div>
+              <div class="loading-cards">
+                @if (showSpinner) {
+                  <mat-spinner></mat-spinner>
+                }
+              </div>

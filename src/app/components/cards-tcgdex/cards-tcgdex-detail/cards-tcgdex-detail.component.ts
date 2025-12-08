@@ -1,23 +1,36 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit, inject } from '@angular/core';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 
-import {
-  UntypedFormGroup,
-  UntypedFormControl,
-  Validators,
-} from '@angular/forms';
+import { UntypedFormGroup, UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import TCGdex, { Card, CardResume, SerieResume } from '@tcgdex/sdk';
+import { MatCard } from '@angular/material/card';
+import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatButton } from '@angular/material/button';
+import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 const tcgdex = new TCGdex('en');
 
 @Component({
-  selector: 'app-cards-detail',
-  templateUrl: './cards-tcgdex-detail.component.html',
-  styleUrls: ['./cards-tcgdex-detail.component.css'],
-  standalone: false,
+    selector: 'app-cards-detail',
+    templateUrl: './cards-tcgdex-detail.component.html',
+    styleUrls: ['./cards-tcgdex-detail.component.css'],
+    imports: [
+        MatCard,
+        FormsModule,
+        ReactiveFormsModule,
+        MatFormField,
+        MatLabel,
+        MatInput,
+        MatButton,
+        RouterLink,
+        MatProgressSpinner,
+    ],
 })
 export class CardsTcgdexDetailComponent implements OnInit {
+  private route = inject(ActivatedRoute);
+  private toast = inject(MatSnackBar);
+
   public idCard: string;
   public cardDetails: Card;
   public lowQualityWebp: string;
@@ -36,8 +49,6 @@ export class CardsTcgdexDetailComponent implements OnInit {
     rarity: new UntypedFormControl('', [Validators.required]),
     types: new UntypedFormControl('', [Validators.required]),
   });
-
-  constructor(private route: ActivatedRoute, private toast: MatSnackBar) {}
 
   public ngOnInit(): void {
     this.route.paramMap.subscribe((params) => {

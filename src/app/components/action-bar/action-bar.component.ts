@@ -1,20 +1,19 @@
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, Input, input, output } from '@angular/core';
 
 @Component({
-  selector: 'app-action-bar',
-  standalone: false,
-  templateUrl: './action-bar.component.html',
-  styleUrl: './action-bar.component.scss',
+    selector: 'app-action-bar',
+    templateUrl: './action-bar.component.html',
+    styleUrl: './action-bar.component.scss',
 })
 export class ActionBarComponent {
   @Input() pageIndex = 0;
-  @Input() pageSize = 10;
-  @Input() totalItems = 0;
+  readonly pageSize = input(10);
+  readonly totalItems = input(0);
 
-  @Output() pageChange = new EventEmitter<number>();
+  readonly pageChange = output<number>();
 
   public nextPage() {
-    const maxPage = Math.floor(this.totalItems / this.pageSize);
+    const maxPage = Math.floor(this.totalItems() / this.pageSize());
     this.setPageIndex(maxPage);
     this.pageChange.emit(this.pageIndex);
   }
@@ -39,7 +38,7 @@ export class ActionBarComponent {
   }
 
   public isDisabledNext(): boolean {
-    return (this.pageIndex + 1) * this.pageSize >= this.totalItems;
+    return (this.pageIndex + 1) * this.pageSize() >= this.totalItems();
   }
 
   public isPageIndexZero(): boolean {

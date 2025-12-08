@@ -1,10 +1,10 @@
 <body>
   <div class="cards-container">
     <div class="cards-box">
+      @for (card of cards; track card) {
       <mat-card
         class="card"
-        *ngFor="let card of cards"
-        routerLink="/cards/{{ card.id }}/{{ card.types }}"
+        routerLink="/cards/pokemontcg/{{ card.id }}/{{ card.types }}"
       >
         <mat-card-header>
           <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
@@ -13,6 +13,7 @@
         <img mat-card-image src="{{ card.images.small }}" />
         }
       </mat-card>
+      }
     </div>
     <app-action-bar
       [pageIndex]="pageIndex"
@@ -21,7 +22,9 @@
     ></app-action-bar>
   </div>
   <div class="loading-cards" data-cy="spinner">
-    <mat-spinner *ngIf="showSpinner"></mat-spinner>
+    @if (showSpinner) {
+    <mat-spinner></mat-spinner>
+    }
   </div>
   @if (errorMessage) {
   <div class="error-overlay">
