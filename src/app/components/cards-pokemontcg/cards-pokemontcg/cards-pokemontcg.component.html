@@ -1,7 +1,7 @@
 <body>
   <div class="cards-container">
     <div class="cards-box">
-      @for (card of cards; track card) {
+      @for (card of cards; track card.id) {
       <mat-card
         class="card"
         routerLink="/cards/pokemontcg/{{ card.id }}/{{ card.types }}"

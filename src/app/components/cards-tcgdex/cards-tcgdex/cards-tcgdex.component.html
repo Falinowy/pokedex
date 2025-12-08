@@ -10,7 +10,7 @@
 
   <div class="cards-container">
     <div class="cards-box">
-      @for (cardFromTcgdex of showCardsFromTcgdex; track cardFromTcgdex) {
+      @for (cardFromTcgdex of showCardsFromTcgdex; track cardFromTcgdex.id) {
       <mat-card class="card" routerLink="/cards/tcgdex/{{ cardFromTcgdex.id }}">
         <mat-card-header>
           <mat-card-title class="title-card">{{
