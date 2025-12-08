@@ -13,7 +13,6 @@ import { MatButtonModule } from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { MatInputModule } from '@angular/material/input';
-import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActionBarComponent } from './components/action-bar/action-bar.component';
@@ -29,22 +28,21 @@ const MATERIAL_MODULES = [
 ];
 
 @NgModule({
-    declarations: [AppComponent],
-    bootstrap: [AppComponent],
-    imports: [
-        BrowserModule,
-        AppRoutingModule,
-        FormsModule,
-        ReactiveFormsModule,
-        BrowserAnimationsModule,
-        MATERIAL_MODULES,
-        CardsPokemontcgComponent,
-        CardsPokemontcgDetailComponent,
-        CardsTcgdexComponent,
-        CardsTcgdexDetailComponent,
-        HeaderComponent,
-        ActionBarComponent,
-    ],
-    providers: [provideHttpClient(withInterceptorsFromDi())],
+  declarations: [AppComponent],
+  bootstrap: [AppComponent],
+  imports: [
+    BrowserModule,
+    AppRoutingModule,
+    FormsModule,
+    ReactiveFormsModule,
+    MATERIAL_MODULES,
+    CardsPokemontcgComponent,
+    CardsPokemontcgDetailComponent,
+    CardsTcgdexComponent,
+    CardsTcgdexDetailComponent,
+    HeaderComponent,
+    ActionBarComponent,
+  ],
+  providers: [provideHttpClient(withInterceptorsFromDi())],
 })
 export class AppModule {}

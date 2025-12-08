@@ -1,8 +1,8 @@
 import { Card } from './card';
 
-export interface Pullcard {
+export interface Pullcards {
   count: number;
-  data: Card;
+  data: Card[];
   page: number;
   pageSize: number;
   totalCount: number;

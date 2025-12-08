@@ -2,7 +2,13 @@ import { Component, OnDestroy, OnInit, inject } from '@angular/core';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { Subscription } from 'rxjs';
 import { Card } from '../../module/card';
-import { UntypedFormGroup, UntypedFormControl, Validators, FormsModule, ReactiveFormsModule } from '@angular/forms';
+import {
+  UntypedFormGroup,
+  UntypedFormControl,
+  Validators,
+  FormsModule,
+  ReactiveFormsModule,
+} from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { CardsPokemontcgService } from 'src/app/service/pokemontcg/cards-pokemontcg.service';
 import { MatCard } from '@angular/material/card';
@@ -11,20 +17,20 @@ import { MatButton } from '@angular/material/button';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-    selector: 'app-cards-pokemontcg-detail',
-    templateUrl: './cards-pokemontcg-detail.component.html',
-    styleUrls: ['./cards-pokemontcg-detail.component.css'],
-    imports: [
-        MatCard,
-        FormsModule,
-        ReactiveFormsModule,
-        MatFormField,
-        MatLabel,
-        MatInput,
-        MatButton,
-        RouterLink,
-        MatProgressSpinner,
-    ],
+  selector: 'app-cards-pokemontcg-detail',
+  templateUrl: './cards-pokemontcg-detail.component.html',
+  styleUrls: ['./cards-pokemontcg-detail.component.css'],
+  imports: [
+    MatCard,
+    FormsModule,
+    ReactiveFormsModule,
+    MatFormField,
+    MatLabel,
+    MatInput,
+    MatButton,
+    RouterLink,
+    MatProgressSpinner,
+  ],
 })
 export class CardsPokemontcgDetailComponent implements OnInit, OnDestroy {
   private route = inject(ActivatedRoute);
@@ -70,13 +76,12 @@ export class CardsPokemontcgDetailComponent implements OnInit, OnDestroy {
   }
   getCardDetail(): void {
     this.idCard = this.route.snapshot.params.idCard;
-    console.log(this.route);
-
     this.cardsDetailSubscription = this.cardsService
       .getCardDetail(this.idCard)
       .subscribe((result) => {
-        this.cardDetails = result.data[0];
+        this.cardDetails = result.data;
         this.setValueForm();
+        this.showSpinner = false;
       });
   }
   getSimilarCards(): void {

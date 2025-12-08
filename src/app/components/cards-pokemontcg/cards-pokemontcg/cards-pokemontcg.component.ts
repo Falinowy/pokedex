@@ -3,23 +3,28 @@ import { Subscription } from 'rxjs';
 import { Card } from '../../module/card';
 import { CardsPokemontcgService } from 'src/app/service/pokemontcg/cards-pokemontcg.service';
 import { Router, RouterLink } from '@angular/router';
-import { MatCard, MatCardHeader, MatCardTitle, MatCardImage } from '@angular/material/card';
+import {
+  MatCard,
+  MatCardHeader,
+  MatCardTitle,
+  MatCardImage,
+} from '@angular/material/card';
 import { ActionBarComponent } from '../../action-bar/action-bar.component';
 import { MatProgressSpinner } from '@angular/material/progress-spinner';
 
 @Component({
-    selector: 'app-cards-pokemontcg',
-    templateUrl: './cards-pokemontcg.component.html',
-    styleUrls: ['./cards-pokemontcg.component.css'],
-    imports: [
-        MatCard,
-        RouterLink,
-        MatCardHeader,
-        MatCardTitle,
-        MatCardImage,
-        ActionBarComponent,
-        MatProgressSpinner,
-    ],
+  selector: 'app-cards-pokemontcg',
+  templateUrl: './cards-pokemontcg.component.html',
+  styleUrls: ['./cards-pokemontcg.component.css'],
+  imports: [
+    MatCard,
+    RouterLink,
+    MatCardHeader,
+    MatCardTitle,
+    MatCardImage,
+    ActionBarComponent,
+    MatProgressSpinner,
+  ],
 })
 export class CardsPokemontcgComponent implements OnInit, OnDestroy {
   private cardsService = inject(CardsPokemontcgService);
@@ -45,7 +50,6 @@ export class CardsPokemontcgComponent implements OnInit, OnDestroy {
         next: (result) => {
           this.cards = result.data;
           this.showSpinner = false;
-          console.log(this.cards);
         },
         error: (err) => {
           this.showSpinner = false;
