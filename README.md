@@ -18,7 +18,7 @@ Aplikacja Pokedex zbudowana przy użyciu najnowszych standardów **Angular**, of
 
 ## 🛠 Stos Technologiczny
 
-- **Framework**: [Angular 18+](https://angular.io/)
+- **Framework**: [Angular 21](https://angular.io/)
 - **State Management**: Angular Signals
 - **Stylizacja**: SCSS (Sass), BEM-ish methodology
 - **UI Components**: Angular Material (pola formularzy, snackbary)
