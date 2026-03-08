@@ -4,11 +4,12 @@ import { RouterLink } from '@angular/router';
 import { MatCardModule } from '@angular/material/card';
 import { NormalizedCard } from '../card-list/card-list.component';
 import { ActionBarComponent } from '../../action-bar/action-bar.component';
+import { ImgLoaderDirective } from '../../../directives/img-loader.directive';
 
 @Component({
   selector: 'app-similar-cards',
   standalone: true,
-  imports: [CommonModule, RouterLink, ActionBarComponent, MatCardModule],
+  imports: [CommonModule, RouterLink, ActionBarComponent, MatCardModule, ImgLoaderDirective],
   templateUrl: './similar-cards.component.html',
   styleUrls: ['./similar-cards.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

@@ -1,4 +1,4 @@
-<header class="header">
+<header class="header" role="banner">
   <div class="header-left">
     <button
       class="back-button"
@@ -7,7 +7,7 @@
       data-cy="back"
     >
       <div class="btn-content">
-        <span class="icon">←</span>
+        <span class="icon" aria-hidden="true">←</span>
         <span>Back</span>
       </div>
     </button>
@@ -18,8 +18,8 @@
         (click)="goOverview()"
       >
         <div class="btn-content">
-          <span class="icon">▤</span>
-          <span>Katalog</span>
+          <span class="icon" aria-hidden="true">▤</span>
+          <span>Catalog</span>
         </div>
       </button>
     }

@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import 'styles/variables';
+
 * {
   padding: 0;
   margin: 0;
@@ -7,7 +9,7 @@
 body {
   margin: 0;
   min-height: 100vh;
-  background: linear-gradient(135deg, #dbeafe, #f0fdfa) fixed;
+  background: linear-gradient(135deg, $bg-gradient-start, $bg-gradient-end) fixed;
   background-attachment: fixed;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
@@ -18,8 +20,8 @@ body {
 }
 
 .toast-success {
-  background-color: rgb(37, 226, 37);
-  color: rgb(0, 0, 0);
+  background-color: $success-color;
+  color: $surface-white;
   font-size: 50px;
 }
 
@@ -44,13 +46,13 @@ body {
 }
 
 .btn-blue {
-  background: #3b82f6;
-  color: white;
+  background: $primary-color;
+  color: $text-light;
 }
 
 .btn-green {
-  background: #10b981;
-  color: white;
+  background: $success-color;
+  color: $text-light;
 }
 
 @import 'styles/buttons';
@@ -64,4 +66,30 @@ body {
   display: flex;
   justify-content: center;
   gap: 3rem;
+}
+
+.card-placeholder {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 714 / 1000;
+  background: url('assets/images/card-back.png') no-repeat center;
+  background-size: contain;
+  background-color: rgba(0, 0, 0, 0.03);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: background 0.3s ease;
+
+  &.is-loaded {
+    background-image: none;
+    background-color: transparent;
+  }
+}
+
+img.fade-in {
+  opacity: 0;
+  transition: opacity 0.4s ease-in-out;
+
+  &.loaded {
+    opacity: 1;
+  }
 }

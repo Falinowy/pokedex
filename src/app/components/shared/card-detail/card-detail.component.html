@@ -1,7 +1,14 @@
 <mat-card class="card-detail-layout">
   <div class="card-header-split">
     <div class="card-image-panel">
-      <img [src]="imageUrl() || 'assets/images/card-back.png'" [alt]="imageAlt()" (error)="$any($event.target).src = 'assets/images/card-back.png'" />
+      <div class="card-placeholder" style="max-width: 400px; margin: 0 auto;">
+        <img 
+          appImgLoader
+          class="fade-in"
+          [src]="imageUrl() || 'assets/images/card-back.png'" 
+          [alt]="imageAlt()" 
+        />
+      </div>
     </div>
 
     <div class="card-form-panel">
@@ -21,8 +28,8 @@
   <ng-content select="[similar-cards-title]"></ng-content>
 </app-similar-cards>
 
-<div class="loading-cards" data-cy="spinner">
+<div class="loading-cards" data-cy="spinner" role="status" [attr.aria-busy]="showSpinner()">
   @if (showSpinner()) {
-  <mat-spinner></mat-spinner>
+  <mat-spinner aria-label="Loading card details"></mat-spinner>
   }
 </div>

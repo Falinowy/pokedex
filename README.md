@@ -4,6 +4,11 @@ Aplikacja Pokedex zbudowana przy użyciu najnowszych standardów **Angular**, of
 
 ---
 
+## 🌐 Live Demo
+[**Click here to view the live application**](https://pokecards-app.netlify.app/)
+
+---
+
 ## 🚀 Kluczowe Funkcje
 
 - **Podwójne Źródło Danych**: Wybór między `PokemonTCG API` a `TCGdex API` bezpośrednio z poziomu ekranu startowego.

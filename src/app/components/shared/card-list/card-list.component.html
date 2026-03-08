@@ -17,14 +17,21 @@
       </mat-autocomplete>
     </mat-form-field>
   </div>
-  <div class="cards-box">
+  <div class="cards-box" role="list">
     @for (card of cards(); track card.id) {
-    <mat-card class="card" [routerLink]="card.routerLink">
+    <mat-card class="card" [routerLink]="card.routerLink" role="listitem" [attr.aria-label]="'Pokemon details: ' + card.name">
       <mat-card-header>
         <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
       </mat-card-header>
       <div class="image-container">
-        <img [src]="card.imageUrl || 'assets/images/card-back.png'" [alt]="card.name" (error)="$any($event.target).src = 'assets/images/card-back.png'" />
+        <div class="card-placeholder">
+          <img 
+            appImgLoader
+            class="fade-in"
+            [src]="card.imageUrl || 'assets/images/card-back.png'" 
+            [alt]="card.name" 
+          />
+        </div>
       </div>
     </mat-card>
     }
@@ -37,24 +44,24 @@
   ></app-action-bar>
 </div>
 
-<div class="loading-cards" data-cy="spinner">
+<div class="loading-cards" data-cy="spinner" role="status" [attr.aria-busy]="showSpinner()">
   @if (showSpinner()) {
-  <mat-spinner></mat-spinner>
+  <mat-spinner aria-label="Loading pokemon cards"></mat-spinner>
   }
 </div>
 
 @if (errorMessage()) {
-<div class="error-overlay">
+<div class="error-overlay" role="alertDialog" aria-modal="true">
   <div class="error-box">
     <p>{{ errorMessage() }}</p>
     <div class="container-buttons">
       @if (showSourceChangeButton()) {
       <button mat-raised-button color="accent" (click)="onChangeSource()">
-        Zmień źródło kart
+        Change data source
       </button>
       }
       <button mat-raised-button color="primary" (click)="onReload()">
-        Wczytaj karty ponownie
+        Reload cards
       </button>
     </div>
   </div>

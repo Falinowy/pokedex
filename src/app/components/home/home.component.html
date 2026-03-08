@@ -1,28 +1,30 @@
-<div class="container">
+<main class="container" role="main">
   <div class="box">
-    <h2 class="title">Choose card source</h2>
-    <div class="container-buttons">
-      <button class="btn btn-blue" (click)="selectApi('pokemontcg')">
+    <h2 class="title" id="source-title">Choose card source</h2>
+    <div class="container-buttons" role="group" aria-labelledby="source-title">
+      <button class="btn btn-blue" (click)="selectApi('pokemontcg')" aria-label="Select PokemonTCG API source">
         <div class="btn-content">
           <img
             src="assets/icons/gengar.png"
-            alt="PokemonTCG API"
+            alt=""
             class="icon"
+            aria-hidden="true"
           />
           PokemonTCG API
         </div>
       </button>
 
-      <button class="btn btn-green" (click)="selectApi('tcgdex')">
+      <button class="btn btn-green" (click)="selectApi('tcgdex')" aria-label="Select TCGdex API source">
         <div class="btn-content">
           <img
             src="assets/icons/TCGdexIcon.svg"
-            alt="TCGdex API"
+            alt=""
             class="icon"
+            aria-hidden="true"
           />
           API
         </div>
       </button>
     </div>
   </div>
-</div>
+</main>

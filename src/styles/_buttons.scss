@@ -1,3 +1,5 @@
+@import 'variables';
+
 @mixin btn-premium-base {
   display: inline-flex;
   align-items: center;
@@ -22,27 +24,27 @@
 }
 
 @mixin btn-primary-styles {
-  background: rgba(37, 99, 235, 0.05);
-  color: #2563eb;
-  border-color: rgba(37, 99, 235, 0.1);
+  background: rgba($primary-color, 0.05);
+  color: $primary-color;
+  border-color: rgba($primary-color, 0.1);
 
   &:hover:not(:disabled) {
-    background: #2563eb;
-    color: white;
-    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    background: $primary-color;
+    color: $text-light;
+    box-shadow: 0 4px 12px rgba($primary-color, 0.2);
     transform: translateY(-2px);
   }
 }
 
 @mixin btn-accent-styles {
-  background: rgba(124, 58, 237, 0.05);
-  color: #7c3aed;
-  border-color: rgba(124, 58, 237, 0.1);
+  background: rgba($accent-color, 0.05);
+  color: $accent-color;
+  border-color: rgba($accent-color, 0.1);
 
   &:hover:not(:disabled) {
-    background: #7c3aed;
-    color: white;
-    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    background: $accent-color;
+    color: $text-light;
+    box-shadow: 0 4px 12px rgba($accent-color, 0.2);
     transform: translateY(-2px);
   }
 }

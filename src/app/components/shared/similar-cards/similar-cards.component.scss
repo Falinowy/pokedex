@@ -1,10 +1,12 @@
+@import 'variables';
+
 .similar-cards-container {
   max-width: 1200px;
   margin: 2rem auto;
-  background-color: #fff;
+  background-color: $surface-white;
   padding: 2rem;
   border-radius: 12px;
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px $shadow-medium;
 }
 
 .similar-grid {
@@ -18,9 +20,9 @@
   height: 100%;
   border-radius: 16px;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  background: $surface-white;
+  border: 1px solid $border-color;
+  box-shadow: 0 4px 20px $shadow-soft;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
@@ -28,21 +30,21 @@
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    box-shadow: 0 12px 30px $shadow-medium;
+    background-color: $surface-white;
   }
 }
 
 .mat-mdc-card-header {
   padding: 0.8rem;
-  background: #fcfcfc;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  background: $surface-off-white;
+  border-bottom: 1px solid $border-light;
 }
 
 .title-card {
   font-size: 0.9rem !important;
   font-weight: 600 !important;
-  color: #2d3748;
+  color: $text-secondary;
   margin: 0 !important;
   text-align: center;
   white-space: nowrap;
@@ -56,7 +58,7 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  background: white;
+  background: $surface-white;
 }
 
 .card img {
@@ -64,7 +66,7 @@
   height: auto;
   max-height: 280px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 8px $shadow-medium);
   transition: transform 0.3s ease;
 }
 

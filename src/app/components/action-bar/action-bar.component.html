@@ -1,15 +1,21 @@
-  <div class="pagination">
-  <button class="btn btn-green" (click)="prevPage()" [disabled]="isPageIndexZero()">
-    <span class="arrow">←</span> <span class="btn-text">Poprzednie</span>
+<nav class="pagination" aria-label="Pagination">
+  <button 
+    class="btn btn-green" 
+    (click)="prevPage()" 
+    [disabled]="isPageIndexZero()"
+    aria-label="Previous page"
+  >
+    <span class="arrow" aria-hidden="true">←</span> <span class="btn-text">Previous</span>
   </button>
 
-  <span class="pageInfo">Strona {{ getPageNumber() }}</span>
+  <span class="pageInfo" aria-live="polite">Page {{ getPageNumber() }}</span>
 
   <button
     class="btn btn-blue"
     (click)="nextPage()"
     [disabled]="isDisabledNext()"
+    aria-label="Next page"
   >
-    <span class="btn-text">Następne</span> <span class="arrow">→</span>
+    <span class="btn-text">Next</span> <span class="arrow" aria-hidden="true">→</span>
   </button>
-</div>
+</nav>

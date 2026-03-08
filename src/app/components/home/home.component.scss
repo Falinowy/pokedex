@@ -1,4 +1,5 @@
-@import 'src/styles/buttons';
+@import 'variables';
+@import 'buttons';
 
 .container {
   display: flex;
@@ -6,17 +7,17 @@
   align-items: flex-start;
   min-height: calc(100vh - 100px);
   padding: 4rem 1.5rem;
-  background: radial-gradient(circle at top right, rgba(37, 99, 235, 0.05), transparent),
-              radial-gradient(circle at bottom left, rgba(124, 58, 237, 0.05), transparent);
+  background: radial-gradient(circle at top right, rgba($primary-color, 0.05), transparent),
+              radial-gradient(circle at bottom left, rgba($accent-color, 0.05), transparent);
   box-sizing: border-box;
 }
 
 .box {
-  background: white;
+  background: $surface-white;
   padding: 3rem 2rem;
   border-radius: 24px;
   box-shadow: 0 10px 40px rgba(0, 0, 0, 0.04);
-  border: 1px solid rgba(0, 0, 0, 0.03);
+  border: 1px solid $border-light;
   text-align: center;
   max-width: 500px;
   width: 100%;
@@ -27,7 +28,7 @@
   margin-bottom: 2.5rem;
   font-size: 1.75rem;
   font-weight: 800;
-  color: #1e293b;
+  color: $text-primary;
   letter-spacing: -0.02em;
 }
 
@@ -61,7 +62,7 @@
 
 .icon {
   height: 2.5rem;
-  filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 2px 4px $shadow-medium);
 }
 
 @keyframes fadeIn {

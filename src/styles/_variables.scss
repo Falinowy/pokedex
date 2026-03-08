@@ -1,0 +1,35 @@
+$primary-color: #2563eb;
+$accent-color: #7c3aed;
+
+$bg-gradient-start: #dbeafe;
+$bg-gradient-end: #f0fdfa;
+$surface-white: #ffffff;
+$surface-glass: rgba(255, 255, 255, 0.7);
+$surface-off-white: #fcfcfc;
+
+$text-primary: #1e293b;
+$text-secondary: #2d3748;
+$text-light: #ffffff;
+
+$success-color: #10b981;
+$error-color: #ef4444;
+$error-text: #991b1b;
+
+$border-color: rgba(0, 0, 0, 0.05);
+$border-light: rgba(0, 0, 0, 0.03);
+$shadow-soft: rgba(0, 0, 0, 0.04);
+$shadow-medium: rgba(0, 0, 0, 0.1);
+$shadow-heavy: rgba(15, 23, 42, 0.4);
+
+@mixin glass-effect {
+  background: $surface-glass;
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+@mixin card-base {
+  background: $surface-white;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px $shadow-medium;
+}

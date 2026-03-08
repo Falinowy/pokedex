@@ -4,11 +4,12 @@ import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { SimilarCardsComponent } from '../similar-cards/similar-cards.component';
 import { NormalizedCard } from '../card-list/card-list.component';
+import { ImgLoaderDirective } from '../../../directives/img-loader.directive';
 
 @Component({
   selector: 'app-card-detail',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, SimilarCardsComponent],
+  imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, SimilarCardsComponent, ImgLoaderDirective],
   templateUrl: './card-detail.component.html',
   styleUrls: ['./card-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

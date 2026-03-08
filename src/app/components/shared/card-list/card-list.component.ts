@@ -1,4 +1,4 @@
-import { Component, ChangeDetectionStrategy, input, output } from '@angular/core';
+import { Component, input, output } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
@@ -10,6 +10,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatIconModule } from '@angular/material/icon';
 import { MatAutocompleteModule } from '@angular/material/autocomplete';
 import { FormsModule } from '@angular/forms';
+import { ImgLoaderDirective } from '../../../directives/img-loader.directive';
 import { computed } from '@angular/core';
 
 export interface NormalizedCard {
@@ -33,11 +34,11 @@ export interface NormalizedCard {
     MatInputModule,
     MatIconModule,
     MatAutocompleteModule,
-    FormsModule
+    FormsModule,
+    ImgLoaderDirective
   ],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
-  changeDetection: ChangeDetectionStrategy.OnPush
 })
 export class CardListComponent {
   public cards = input<NormalizedCard[]>([]);
@@ -80,4 +81,3 @@ export class CardListComponent {
     this.search.emit(query);
   }
 }
-

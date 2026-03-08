@@ -1,10 +1,12 @@
+@import 'variables';
+
 .footer {
   margin-top: auto;
   padding: 2rem 1.5rem;
-  background: rgba(255, 255, 255, 0.05);
+  background: rgba($surface-white, 0.05);
   backdrop-filter: blur(10px);
-  border-top: 1px solid rgba(255, 255, 255, 0.1);
-  box-shadow: 0 -4px 32px rgba(0, 0, 0, 0.05);
+  border-top: 1px solid rgba($surface-white, 0.1);
+  box-shadow: 0 -4px 32px $shadow-soft;
 }
 
 .footer-content {
@@ -22,13 +24,13 @@
 }
 
 .copyright {
-  color: #64748b;
+  color: $text-secondary;
   font-size: 0.9rem;
   font-weight: 500;
 }
 
 .author-section {
-  color: #64748b;
+  color: $text-secondary;
   font-size: 0.9rem;
   font-weight: 500;
   display: flex;
@@ -36,21 +38,21 @@
   gap: 6px;
 
   .heart {
-    color: #ef4444;
+    color: $error-color;
     display: inline-block;
     animation: pulse 2s infinite;
   }
 }
 
 .author-link {
-  color: #2563eb;
+  color: $primary-color;
   text-decoration: none;
   font-weight: 700;
   border-bottom: 2px solid transparent;
   transition: all 0.2s ease;
 
   &:hover {
-    border-bottom-color: #2563eb;
+    border-bottom-color: $primary-color;
     opacity: 0.8;
   }
 }
@@ -62,13 +64,13 @@
 }
 
 .version-tag {
-  background: rgba(37, 99, 235, 0.08);
-  color: #2563eb;
+  background: rgba($primary-color, 0.08);
+  color: $primary-color;
   padding: 0.25rem 0.75rem;
   border-radius: 999px;
   font-size: 0.8rem;
   font-weight: 700;
-  border: 1px solid rgba(37, 99, 235, 0.1);
+  border: 1px solid rgba($primary-color, 0.1);
   display: flex;
   align-items: center;
   gap: 2px;
@@ -78,7 +80,7 @@
   }
 
   &:hover {
-    background: rgba(37, 99, 235, 0.12);
+    background: rgba($primary-color, 0.12);
     transform: scale(1.05);
     transition: all 0.2s ease;
   }

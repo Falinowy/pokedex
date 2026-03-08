@@ -1,3 +1,5 @@
+@import 'variables';
+
 .cards-container {
   max-width: 1400px;
   margin: 2rem auto;
@@ -18,7 +20,7 @@
   max-width: 500px;
   
   ::v-deep .mat-mdc-form-field-flex {
-    background: white !important;
+    background: $surface-white !important;
     border-radius: 12px !important;
   }
 }
@@ -34,9 +36,9 @@
   height: 100%;
   border-radius: 16px;
   overflow: hidden;
-  background: #fff;
-  border: 1px solid rgba(0, 0, 0, 0.05);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.04);
+  background: $surface-white;
+  border: 1px solid $border-color;
+  box-shadow: 0 4px 20px $shadow-soft;
   transition: transform 0.3s cubic-bezier(0.34, 1.56, 0.64, 1), box-shadow 0.3s ease;
   cursor: pointer;
   display: flex;
@@ -44,21 +46,21 @@
 
   &:hover {
     transform: translateY(-8px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.1);
-    background-color: #fff;
+    box-shadow: 0 12px 30px $shadow-medium;
+    background-color: $surface-white;
   }
 }
 
 .mat-mdc-card-header {
   padding: 0.8rem;
-  background: #fcfcfc;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.03);
+  background: $surface-off-white;
+  border-bottom: 1px solid $border-light;
 }
 
 .title-card {
   font-size: 1rem !important;
   font-weight: 600 !important;
-  color: #2d3748;
+  color: $text-secondary;
   margin: 0 !important;
   text-align: center;
   white-space: nowrap;
@@ -72,7 +74,7 @@
   justify-content: center;
   align-items: center;
   flex-grow: 1;
-  background: white;
+  background: $surface-white;
 }
 
 .card img {
@@ -80,7 +82,7 @@
   height: auto;
   max-height: 280px;
   object-fit: contain;
-  filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.1));
+  filter: drop-shadow(0 4px 8px $shadow-medium);
   transition: transform 0.3s ease;
 }
 
@@ -97,7 +99,7 @@
 .error-overlay {
   position: fixed;
   inset: 0;
-  background: rgba(15, 23, 42, 0.4);
+  background: $shadow-heavy;
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   display: flex;
@@ -108,12 +110,12 @@
 }
 
 .error-box {
-  background: rgba(255, 255, 255, 0.9);
+  background: rgba($surface-white, 0.9);
   padding: 3rem;
   border-radius: 24px;
   text-align: center;
   box-shadow: 0 20px 50px rgba(0, 0, 0, 0.1);
-  border: 1px solid rgba(239, 68, 68, 0.1);
+  border: 1px solid rgba($error-color, 0.1);
   max-width: 500px;
   width: 100%;
   position: relative;
@@ -126,14 +128,14 @@
     right: -10px;
     font-size: 8rem;
     font-weight: 900;
-    color: rgba(239, 68, 68, 0.05);
+    color: rgba($error-color, 0.05);
     transform: rotate(15deg);
     pointer-events: none;
   }
 }
 
 .error-box p {
-  color: #991b1b;
+  color: $error-text;
   font-size: 1.25rem;
   font-weight: 600;
   margin-bottom: 2.5rem;

@@ -1,14 +1,23 @@
 @if (similarCards() && similarCards().length > 0) {
-<div class="similar-cards-container">
-  <ng-content select="[similar-cards-title]"></ng-content>
-  <div class="similar-grid">
+<section class="similar-cards-container" aria-labelledby="similar-title">
+  <div id="similar-title">
+    <ng-content select="[similar-cards-title]"></ng-content>
+  </div>
+  <div class="similar-grid" role="list">
     @for (card of similarCards(); track card.id) {
-    <mat-card class="card similar-card" [routerLink]="card.routerLink">
+    <mat-card class="card similar-card" [routerLink]="card.routerLink" role="listitem" [attr.aria-label]="'Pokemon details: ' + card.name">
       <mat-card-header>
         <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
       </mat-card-header>
       <div class="image-container">
-        <img class="similar-img" [src]="card.imageUrl || 'assets/images/card-back.png'" [alt]="card.name" (error)="$any($event.target).src = 'assets/images/card-back.png'" />
+        <div class="card-placeholder">
+          <img 
+            appImgLoader
+            class="similar-img fade-in" 
+            [src]="card.imageUrl || 'assets/images/card-back.png'" 
+            [alt]="card.name" 
+          />
+        </div>
       </div>
     </mat-card>
     }
@@ -22,5 +31,5 @@
       (pageChange)="onPageChange($event)"
     ></app-action-bar>
   }
-</div>
+</section>
 }
