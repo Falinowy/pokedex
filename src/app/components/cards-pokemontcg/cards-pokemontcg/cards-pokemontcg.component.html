@@ -1,44 +1,14 @@
 <body>
-  <div class="cards-container">
-    <div class="cards-box">
-      @for (card of cards; track card.id) {
-      <mat-card
-        class="card"
-        routerLink="/cards/pokemontcg/{{ card.id }}/{{ card.types }}"
-      >
-        <mat-card-header>
-          <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
-        </mat-card-header>
-        @if(card.images) {
-        <img mat-card-image src="{{ card.images.small }}" />
-        }
-      </mat-card>
-      }
-    </div>
-    <app-action-bar
-      [pageIndex]="pageIndex"
-      [pageSize]="pageSize"
-      (pageChange)="onPageChange($event)"
-    ></app-action-bar>
-  </div>
-  <div class="loading-cards" data-cy="spinner">
-    @if (showSpinner) {
-    <mat-spinner></mat-spinner>
-    }
-  </div>
-  @if (errorMessage) {
-  <div class="error-overlay">
-    <div class="error-box">
-      <p>{{ errorMessage }}</p>
-      <div class="container-buttons">
-        <button class="btn btn-blue" (click)="goHome()">
-          Zmień źródło kart
-        </button>
-        <button class="btn btn-green" (click)="getCards()">
-          Wczytaj karty ponownie
-        </button>
-      </div>
-    </div>
-  </div>
-  }
+  <app-card-list
+    [cards]="facade.normalizedCards()"
+    [pageIndex]="pageIndex"
+    [pageSize]="pageSize"
+    [totalItems]="facade.cards().length || 0"
+    [showSpinner]="facade.isListLoading()"
+    [errorMessage]="facade.listError()"
+    [showSourceChangeButton]="true"
+    (pageChange)="onPageChange($event)"
+    (reload)="facade.loadCards()"
+    (sourceChange)="goHome()"
+  ></app-card-list>
 </body>

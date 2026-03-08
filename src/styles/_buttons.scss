@@ -1,0 +1,60 @@
+@mixin btn-premium-base {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 0.6rem 1.2rem;
+  font-size: 14px;
+  font-weight: 600;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s cubic-bezier(0.4, 0, 0.2, 1);
+  border: 1px solid transparent;
+  text-decoration: none;
+  font-family: inherit;
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    filter: grayscale(1);
+    transform: none !important;
+  }
+}
+
+@mixin btn-primary-styles {
+  background: rgba(37, 99, 235, 0.05);
+  color: #2563eb;
+  border-color: rgba(37, 99, 235, 0.1);
+
+  &:hover:not(:disabled) {
+    background: #2563eb;
+    color: white;
+    box-shadow: 0 4px 12px rgba(37, 99, 235, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+@mixin btn-accent-styles {
+  background: rgba(124, 58, 237, 0.05);
+  color: #7c3aed;
+  border-color: rgba(124, 58, 237, 0.1);
+
+  &:hover:not(:disabled) {
+    background: #7c3aed;
+    color: white;
+    box-shadow: 0 4px 12px rgba(124, 58, 237, 0.2);
+    transform: translateY(-2px);
+  }
+}
+
+.btn-premium {
+  @include btn-premium-base;
+
+  &.btn-primary {
+    @include btn-primary-styles;
+  }
+
+  &.btn-accent {
+    @include btn-accent-styles;
+  }
+}

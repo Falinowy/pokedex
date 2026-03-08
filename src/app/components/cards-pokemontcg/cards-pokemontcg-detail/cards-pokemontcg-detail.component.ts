@@ -1,114 +1,98 @@
-import { Component, OnDestroy, OnInit, inject } from '@angular/core';
-import { ActivatedRoute, Router, RouterLink } from '@angular/router';
-import { Subscription } from 'rxjs';
-import { Card } from '../../module/card';
+import { Component, OnInit, inject, effect } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
+import { CardsPokemontcgFacade } from 'src/app/service/pokemontcg/cards-pokemontcg.facade';
 import {
-  UntypedFormGroup,
-  UntypedFormControl,
+  FormGroup,
+  FormControl,
   Validators,
   FormsModule,
   ReactiveFormsModule,
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
-import { CardsPokemontcgService } from 'src/app/service/pokemontcg/cards-pokemontcg.service';
-import { MatCard } from '@angular/material/card';
-import { MatFormField, MatLabel, MatInput } from '@angular/material/input';
+import { MatFormField, MatLabel, MatInput, MatError } from '@angular/material/input';
 import { MatButton } from '@angular/material/button';
-import { MatProgressSpinner } from '@angular/material/progress-spinner';
+import { CardDetailComponent } from '../../shared/card-detail/card-detail.component';
 
 @Component({
   selector: 'app-cards-pokemontcg-detail',
   templateUrl: './cards-pokemontcg-detail.component.html',
-  styleUrls: ['./cards-pokemontcg-detail.component.css'],
+  styleUrls: ['./cards-pokemontcg-detail.component.scss'],
   imports: [
-    MatCard,
     FormsModule,
     ReactiveFormsModule,
     MatFormField,
     MatLabel,
     MatInput,
+    MatError,
     MatButton,
-    RouterLink,
-    MatProgressSpinner,
+    CardDetailComponent
   ],
 })
-export class CardsPokemontcgDetailComponent implements OnInit, OnDestroy {
+export class CardsPokemontcgDetailComponent implements OnInit {
   private route = inject(ActivatedRoute);
-  private cardsService = inject(CardsPokemontcgService);
+  public facade = inject(CardsPokemontcgFacade);
   private router = inject(Router);
   private toast = inject(MatSnackBar);
 
   idCard: string;
   types: string;
-  cardDetails: Card;
-  similarPokemons: Card;
-  showSpinner = true;
-  private cardsDetailSubscription: Subscription;
-  private similarCardsSubscription: Subscription;
 
-  form = new UntypedFormGroup({
-    artist: new UntypedFormControl('', [
-      Validators.required,
-      Validators.minLength(3),
-    ]),
-    hp: new UntypedFormControl('', [Validators.required]),
-    nationalPokedexNumbers: new UntypedFormControl('', [Validators.required]),
-    number: new UntypedFormControl('', [Validators.required]),
-    rarity: new UntypedFormControl('', [Validators.required]),
-    types: new UntypedFormControl('', [Validators.required]),
-    superType: new UntypedFormControl('', [Validators.required]),
+  form = new FormGroup({
+    artist: new FormControl<string>('', {
+      nonNullable: true,
+      validators: [Validators.required, Validators.minLength(3)]
+    }),
+    hp: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    nationalPokedexNumbers: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    number: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    rarity: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    types: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
+    superType: new FormControl<string>('', { nonNullable: true, validators: [Validators.required] }),
   });
 
-  ngOnInit(): void {
-    this.getCardDetail();
-    this.getSimilarCards();
-  }
-  setValueForm(): void {
-    this.form.setValue({
-      artist: this.cardDetails.artist,
-      hp: this.cardDetails.hp,
-      nationalPokedexNumbers: this.cardDetails.nationalPokedexNumbers,
-      number: this.cardDetails.number,
-      rarity: this.cardDetails.rarity,
-      types: this.cardDetails.types,
-      superType: this.cardDetails.supertype,
+  constructor() {
+    effect(() => {
+      const card = this.facade.selectedCard();
+      if (card) {
+        this.form.patchValue({
+          artist: card.artist || '',
+          hp: card.hp || '',
+          nationalPokedexNumbers: card.nationalPokedexNumbers?.[0]?.toString() || '',
+          number: card.number || '',
+          rarity: card.rarity || '',
+          types: card.types?.[0] || '',
+          superType: card.supertype || '',
+        });
+        this.form.markAllAsTouched();
+      }
     });
   }
-  getCardDetail(): void {
+
+  ngOnInit(): void {
     this.idCard = this.route.snapshot.params.idCard;
-    this.cardsDetailSubscription = this.cardsService
-      .getCardDetail(this.idCard)
-      .subscribe((result) => {
-        this.cardDetails = result.data;
-        this.setValueForm();
-        this.showSpinner = false;
-      });
-  }
-  getSimilarCards(): void {
+    this.facade.loadCardDetail(this.idCard);
+
     this.types = this.route.snapshot.params.types;
-    this.similarCardsSubscription = this.cardsService
-      .getSimilarCards(this.types)
-      .subscribe((result) => {
-        this.similarPokemons = result.data;
-        this.showSpinner = false;
-      });
+    if (this.types) {
+      this.facade.loadSimilarCards(this.types);
+    }
   }
+
   refresh(): void {
     this.idCard = this.route.snapshot.params.idCard;
     this.types = this.route.snapshot.params.types;
     this.router.routeReuseStrategy.shouldReuseRoute = () => false;
   }
-  ngOnDestroy(): void {
-    this.cardsDetailSubscription.unsubscribe();
-    this.similarCardsSubscription.unsubscribe();
-  }
+
   get valueForm() {
     return this.form.controls;
   }
+
   onSubmitCardsDetail(): void {
     console.log(this.form.value);
     this.onEditSuccess();
   }
+
   private onEditSuccess(): void {
     this.toast.open('Pokemon has been successfully edited!', '', {
       panelClass: 'toast-success',

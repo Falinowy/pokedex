@@ -54,6 +54,8 @@ body {
   color: white;
 }
 
+@import 'styles/buttons';
+
 .btn:hover {
   opacity: 0.9;
   transform: translateY(-3px);

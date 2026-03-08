@@ -1,17 +1,21 @@
-<mat-card class="card-detail">
-  <div class="left-panel">
-    <div class="imgHeader">
-      <img id="imgPokemon" [src]="lowQualityWebp" />
-    </div>
-  </div>
-  <div class="right-panel">
-    @if (cardDetails) {
+@if (facade.selectedCard()) {
+<app-card-detail
+  [imageUrl]="facade.selectedCardImageUrl()"
+  [imageAlt]="facade.selectedCard()?.name || ''"
+  [similarCards]="facade.normalizedSimilarCards()"
+  [showSpinner]="facade.isDetailLoading()"
+  [pageIndex]="facade.similarPageIndex()"
+  [pageSize]="facade.similarPageSize()"
+  [totalItems]="facade.similarCardsTotal()"
+  (pageChange)="facade.changeSimilarPage($event)"
+>
+  <div card-form>
     <form
       class="form-container"
       [formGroup]="form"
       (ngSubmit)="onSubmitCardsDetail()"
     >
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="illustrator">Illustrator:</mat-label>
         <input
           matInput
@@ -19,22 +23,15 @@
           id="illustrator"
           class="form-control"
           data-cy="illustrator"
-          value="{{ cardDetails.illustrator }}"
         />
-        @if ( valueForm['illustrator'].touched &&
-        valueForm['illustrator'].invalid ) {
-        <div class="alert alert-danger">
-          @if ( valueForm['illustrator'].errors &&
-          valueForm['illustrator'].errors['required'] ) {
-          <div>Name is required.</div>
-          } @if ( valueForm['illustrator'].errors &&
-          valueForm['illustrator'].errors['minlength'] ) {
-          <div>Name should be 3 character.</div>
-          }
-        </div>
+        @if (valueForm['illustrator'].hasError('required')) {
+          <mat-error>Name is required.</mat-error>
+        }
+        @if (valueForm['illustrator'].hasError('minlength')) {
+          <mat-error>Name should be 3 characters.</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="hp">Hp</mat-label>
         <input
           matInput
@@ -42,17 +39,12 @@
           id="hp"
           class="form-control"
           data-cy="hp"
-          value="{{ cardDetails.hp }}"
         />
-        @if (valueForm['hp'].touched && valueForm['hp'].invalid) {
-        <div class="alert alert-danger">
-          @if (valueForm['hp'].errors && valueForm['hp'].errors['required']) {
-          <div>Hp is required.</div>
-          }
-        </div>
+        @if (valueForm['hp'].hasError('required')) {
+          <mat-error>Hp is required.</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="dexId">Dex number:</mat-label>
         <input
           matInput
@@ -60,18 +52,12 @@
           id="dexId"
           class="form-control"
           data-cy="dexId"
-          value="{{ cardDetails.dexId }}"
         />
-        @if (valueForm['dexId'].touched && valueForm['dexId'].invalid) {
-        <div class="alert alert-danger">
-          @if ( valueForm['dexId'].errors &&
-          valueForm['dexId'].errors['required'] ) {
-          <div>National Pokedex Numbers is required.</div>
-          }
-        </div>
+        @if (valueForm['dexId'].hasError('required')) {
+          <mat-error>National Pokedex Numbers is required.</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="name">Name</mat-label>
         <input
           matInput
@@ -80,18 +66,12 @@
           type="text"
           class="form-control"
           data-cy="name"
-          value="{{ cardDetails.name }}"
         />
-        @if (valueForm['name'].touched && valueForm['name'].invalid) {
-        <div class="alert alert-danger">
-          @if ( valueForm['name'].errors && valueForm['name'].errors['required']
-          ) {
-          <div>Name is required.</div>
-          }
-        </div>
+        @if (valueForm['name'].hasError('required')) {
+          <mat-error>Name is required.</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="rarity">Rarity</mat-label>
         <input
           matInput
@@ -99,18 +79,12 @@
           id="rarity"
           class="form-control"
           data-cy="rarity"
-          value="{{ cardDetails.rarity }}"
         />
-        @if (valueForm['rarity'].touched && valueForm['rarity'].invalid) {
-        <div class="alert alert-danger">
-          @if ( valueForm['rarity'].errors &&
-          valueForm['rarity'].errors['required'] ) {
-          <div>Rarity is required.</div>
-          }
-        </div>
+        @if (valueForm['rarity'].hasError('required')) {
+          <mat-error>Rarity is required.</mat-error>
         }
       </mat-form-field>
-      <mat-form-field class="full-width">
+      <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="types">Type</mat-label>
         <input
           matInput
@@ -118,21 +92,13 @@
           id="types"
           class="form-control"
           data-cy="types"
-          value="{{ cardDetails.types }}"
         />
-        @if (valueForm['types'].touched && valueForm['types'].invalid) {
-        <div class="alert alert-danger">
-          @if ( valueForm['types'].errors &&
-          valueForm['types'].errors['required'] ) {
-          <div>Type is required.</div>
-          }
-        </div>
+        @if (valueForm['types'].hasError('required')) {
+          <mat-error>Type is required.</mat-error>
         }
       </mat-form-field>
       <button
-        mat-raised-button
-        class="button"
-        color="primary"
+        class="submit-button"
         data-cy="submit"
         [disabled]="form.invalid"
         type="submit"
@@ -140,31 +106,7 @@
         Submit
       </button>
     </form>
-    }
   </div>
-</mat-card>
-<div class="details-container">
-  @if (similarCards?.length) {
-  <mat-card class="similar-wrapper">
-    <h2 class="section-title">More {{ cardDetails.set.name }} Cards</h2>
-    <div class="similar-grid">
-      @for (card of similarCards; track card.id) {
-      <a class="similar-card" [routerLink]="'/cards/tcgdex/' + card.id">
-        <img
-          class="similar-img"
-          [src]="getImageURL('low', 'webp', card)"
-          [alt]="card.name"
-        />
-        <p class="similar-name">{{ card.name }}</p>
-      </a>
-      }
-    </div>
-  </mat-card>
-  }
-</div>
-
-<div class="loading-cards">
-  @if (showSpinner) {
-  <mat-spinner></mat-spinner>
-  }
-</div>
+  <h2 similar-cards-title class="section-title" style="text-align: center; margin-bottom: 20px;">More {{ facade.selectedCard()?.set?.name }} Cards</h2>
+</app-card-detail>
+}

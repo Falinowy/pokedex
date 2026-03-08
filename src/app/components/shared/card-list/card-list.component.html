@@ -1,0 +1,46 @@
+<div class="cards-container">
+  <div class="cards-box">
+    @for (card of cards(); track card.id) {
+    <mat-card class="card" [routerLink]="card.routerLink">
+      <mat-card-header>
+        <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
+      </mat-card-header>
+      @if (card.imageUrl) {
+        <div class="image-container">
+          <img [src]="card.imageUrl" [alt]="card.name" />
+        </div>
+      }
+    </mat-card>
+    }
+  </div>
+  <app-action-bar
+    [pageIndex]="pageIndex()"
+    [pageSize]="pageSize()"
+    [totalItems]="totalItems()"
+    (pageChange)="onPageChange($event)"
+  ></app-action-bar>
+</div>
+
+<div class="loading-cards" data-cy="spinner">
+  @if (showSpinner()) {
+  <mat-spinner></mat-spinner>
+  }
+</div>
+
+@if (errorMessage()) {
+<div class="error-overlay">
+  <div class="error-box">
+    <p>{{ errorMessage() }}</p>
+    <div class="container-buttons">
+      @if (showSourceChangeButton()) {
+      <button mat-raised-button color="accent" (click)="onChangeSource()">
+        Zmień źródło kart
+      </button>
+      }
+      <button mat-raised-button color="primary" (click)="onReload()">
+        Wczytaj karty ponownie
+      </button>
+    </div>
+  </div>
+</div>
+}

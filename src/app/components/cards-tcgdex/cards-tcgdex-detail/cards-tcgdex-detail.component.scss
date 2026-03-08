@@ -1,3 +1,5 @@
+@import 'src/styles/buttons';
+
 .card-detail {
   width: min(900px, 95%);
   margin: 32px auto;
@@ -49,8 +51,11 @@
 .form-container {
   display: flex;
   flex-direction: column;
-  gap: 18px;
+  gap: 16px; 
   width: 100%;
+  padding: 16px;
+  background: white;
+  border-radius: 12px;
 }
 
 .actions {
@@ -60,14 +65,19 @@
 }
 
 .submit-button {
+  @include btn-premium-base;
+  @include btn-primary-styles;
   min-width: 160px;
-  height: 46px;
-  font-size: 16px;
-  border-radius: 8px;
+  height: 48px;
 }
 
 .mat-form-field-appearance-outline .mat-form-field-outline {
   border-radius: 6px;
+}
+
+.full-width {
+  width: 100%;
+  margin-bottom: 4px;
 }
 
 .similar-wrapper {

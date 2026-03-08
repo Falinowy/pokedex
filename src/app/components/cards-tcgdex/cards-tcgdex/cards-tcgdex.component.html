@@ -1,48 +1,13 @@
 <body>
-  @for (card of cards; track card.id) {
-  <mat-card class="card" routerLink="/cards/{{ card.id }}/{{ card.types }}">
-    <mat-card-header>
-      <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
-    </mat-card-header>
-    <img mat-card-image src="{{ card.images.small }}" />
-  </mat-card>
-  }
-
-  <div class="cards-container">
-    <div class="cards-box">
-      @for (cardFromTcgdex of showCardsFromTcgdex; track cardFromTcgdex.id) {
-      <mat-card class="card" routerLink="/cards/tcgdex/{{ cardFromTcgdex.id }}">
-        <mat-card-header>
-          <mat-card-title class="title-card">{{
-            cardFromTcgdex.name
-          }}</mat-card-title>
-        </mat-card-header>
-        @if(cardFromTcgdex.image) {
-        <img mat-card-image src="{{ cardFromTcgdex.image }}" />
-        }
-      </mat-card>
-      }
-    </div>
-    <app-action-bar
-      [pageIndex]="pageIndex"
-      [pageSize]="pageSize"
-      [totalItems]="allCardsFromTcgdex?.length || 0"
-      (pageChange)="onPageChange($event)"
-    ></app-action-bar>
-  </div>
-  <div class="loading-cards" data-cy="spinner">
-    @if (showSpinner) {
-    <mat-spinner></mat-spinner>
-    }
-  </div>
-  @if (errorMessage) {
-  <div class="error-overlay">
-    <div class="error-box">
-      <p>{{ errorMessage }}</p>
-      <button mat-raised-button color="primary" (click)="getCards()">
-        Load Cards
-      </button>
-    </div>
-  </div>
-  }
+  <app-card-list
+    [cards]="facade.normalizedCards()"
+    [pageIndex]="facade.pageIndex()"
+    [pageSize]="facade.pageSize()"
+    [totalItems]="facade.validCards().length || 0"
+    [showSpinner]="facade.isListLoading()"
+    [errorMessage]="facade.listError()"
+    [showSourceChangeButton]="false"
+    (pageChange)="onPageChange($event)"
+    (reload)="facade.loadAllCards()"
+  ></app-card-list>
 </body>

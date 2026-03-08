@@ -5,7 +5,7 @@ import { Router } from '@angular/router';
   selector: 'app-home',
   standalone: false,
   templateUrl: './home.component.html',
-  styleUrl: './home.component.css'
+  styleUrl: './home.component.scss'
 })
 export class HomeComponent {
 private router = inject(Router);
@@ -19,7 +19,6 @@ public selectApi(type: 'pokemontcg' | 'tcgdex') {
       })
       .catch(err => {
         console.error('navigate error:', err);
-        // opcjonalnie pokaż użytkownikowi komunikat
       });
   }
 }

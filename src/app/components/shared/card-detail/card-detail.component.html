@@ -1,0 +1,42 @@
+<mat-card class="card-detail-layout">
+  <div class="card-header-split">
+    <div class="card-image-panel">
+      @if (imageUrl()) {
+        <img [src]="imageUrl()" [alt]="imageAlt()" />
+      }
+    </div>
+
+    <div class="card-form-panel">
+      <ng-content select="[card-form]"></ng-content>
+    </div>
+  </div>
+</mat-card>
+
+@if (similarCards() && similarCards().length > 0) {
+<div class="similar-cards-container">
+  <ng-content select="[similar-cards-title]"></ng-content>
+  <div class="similar-grid">
+    @for (card of similarCards(); track card.id) {
+    <a class="similar-card" [routerLink]="card.routerLink">
+      <img class="similar-img" [src]="card.imageUrl" [alt]="card.name" />
+      <p class="similar-name">{{ card.name }}</p>
+    </a>
+    }
+  </div>
+
+  @if (totalItems() > pageSize()) {
+    <app-action-bar
+      [pageIndex]="pageIndex()"
+      [pageSize]="pageSize()"
+      [totalItems]="totalItems()"
+      (pageChange)="onPageChange($event)"
+    ></app-action-bar>
+  }
+</div>
+}
+
+<div class="loading-cards" data-cy="spinner">
+  @if (showSpinner()) {
+  <mat-spinner></mat-spinner>
+  }
+</div>

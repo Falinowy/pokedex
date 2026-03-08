@@ -1,14 +1,32 @@
 <header class="header">
-  <button
-    class="btn btn-blue back-button"
-    (click)="goBack()"
-    [disabled]="isHomePage()"
-    data-cy="back"
-  >
-    <div class="btn-content">← Back</div>
-  </button>
+  <div class="header-left">
+    <button
+      class="back-button"
+      (click)="goBack()"
+      [disabled]="isHomePage()"
+      data-cy="back"
+    >
+      <div class="btn-content">
+        <span class="icon">←</span>
+        <span>Back</span>
+      </div>
+    </button>
+
+    @if (isDetailPage()) {
+      <button
+        class="back-button catalog-button"
+        (click)="goOverview()"
+      >
+        <div class="btn-content">
+          <span class="icon">▤</span>
+          <span>Katalog</span>
+        </div>
+      </button>
+    }
+  </div>
+
+
   <h1 class="title">Pokedex</h1>
 
-  <!-- Puste miejsce, żeby h1 naprawdę było na środku -->
-  <div class="right-space"></div>
+  <div class="header-right"></div>
 </header>
