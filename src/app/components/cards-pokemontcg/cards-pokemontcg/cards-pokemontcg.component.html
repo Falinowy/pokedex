@@ -7,8 +7,11 @@
     [showSpinner]="facade.isListLoading()"
     [errorMessage]="facade.listError()"
     [showSourceChangeButton]="true"
+    [searchQuery]="facade.searchQuery()"
+    [allPokemonNames]="facade.pokemonNames()"
     (pageChange)="onPageChange($event)"
     (reload)="facade.loadCards()"
     (sourceChange)="goHome()"
+    (search)="onSearch($event)"
   ></app-card-list>
 </body>

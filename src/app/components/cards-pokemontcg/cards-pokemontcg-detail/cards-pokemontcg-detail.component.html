@@ -10,7 +10,7 @@
   (pageChange)="facade.changeSimilarPage($event)"
 >
   <div card-form>
-    <form [formGroup]="form" (ngSubmit)="onSubmitCardsDetail()">
+    <form class="form-container" [formGroup]="form" (ngSubmit)="onSubmitCardsDetail()">
       <mat-form-field class="full-width" appearance="outline" subscriptSizing="dynamic">
         <mat-label for="artist">Artist:</mat-label>
         <input

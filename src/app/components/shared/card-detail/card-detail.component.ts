@@ -2,14 +2,13 @@ import { Component, ChangeDetectionStrategy, input, output } from '@angular/core
 import { CommonModule } from '@angular/common';
 import { MatCardModule } from '@angular/material/card';
 import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
-import { RouterLink } from '@angular/router';
+import { SimilarCardsComponent } from '../similar-cards/similar-cards.component';
 import { NormalizedCard } from '../card-list/card-list.component';
-import { ActionBarComponent } from '../../action-bar/action-bar.component';
 
 @Component({
   selector: 'app-card-detail',
   standalone: true,
-  imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, RouterLink, ActionBarComponent],
+  imports: [CommonModule, MatCardModule, MatProgressSpinnerModule, SimilarCardsComponent],
   templateUrl: './card-detail.component.html',
   styleUrls: ['./card-detail.component.scss'],
   changeDetection: ChangeDetectionStrategy.OnPush

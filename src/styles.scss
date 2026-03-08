@@ -3,21 +3,20 @@
   padding: 0;
   margin: 0;
 }
+
 body {
   margin: 0;
-  height: 100vh;
-  background: linear-gradient(135deg, #dbeafe, #f0fdfa);
-  background-color: #e7e4e4;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #dbeafe, #f0fdfa) fixed;
+  background-attachment: fixed;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
 }
 
 html,
 body {
   height: 100%;
 }
-body {
-  margin: 0;
-  font-family: Roboto, "Helvetica Neue", sans-serif;
-}
+
 .toast-success {
   background-color: rgb(37, 226, 37);
   color: rgb(0, 0, 0);

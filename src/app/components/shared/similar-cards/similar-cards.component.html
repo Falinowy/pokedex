@@ -1,0 +1,26 @@
+@if (similarCards() && similarCards().length > 0) {
+<div class="similar-cards-container">
+  <ng-content select="[similar-cards-title]"></ng-content>
+  <div class="similar-grid">
+    @for (card of similarCards(); track card.id) {
+    <mat-card class="card similar-card" [routerLink]="card.routerLink">
+      <mat-card-header>
+        <mat-card-title class="title-card">{{ card.name }}</mat-card-title>
+      </mat-card-header>
+      <div class="image-container">
+        <img class="similar-img" [src]="card.imageUrl || 'assets/images/card-back.png'" [alt]="card.name" (error)="$any($event.target).src = 'assets/images/card-back.png'" />
+      </div>
+    </mat-card>
+    }
+  </div>
+
+  @if (totalItems() > pageSize()) {
+    <app-action-bar
+      [pageIndex]="pageIndex()"
+      [pageSize]="pageSize()"
+      [totalItems]="totalItems()"
+      (pageChange)="onPageChange($event)"
+    ></app-action-bar>
+  }
+</div>
+}

@@ -18,6 +18,7 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { ActionBarComponent } from './components/action-bar/action-bar.component';
 import { CardsTcgdexComponent } from './components/cards-tcgdex/cards-tcgdex/cards-tcgdex.component';
 import { CardsTcgdexDetailComponent } from './components/cards-tcgdex/cards-tcgdex-detail/cards-tcgdex-detail.component';
+import { FooterComponent } from './components/shared/footer/footer.component';
 
 const MATERIAL_MODULES = [
   MatCardModule,
@@ -42,6 +43,7 @@ const MATERIAL_MODULES = [
     CardsTcgdexDetailComponent,
     HeaderComponent,
     ActionBarComponent,
+    FooterComponent,
   ],
   providers: [provideHttpClient(withInterceptorsFromDi())],
 })

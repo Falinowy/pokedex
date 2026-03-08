@@ -1,6 +1,6 @@
   <div class="pagination">
   <button class="btn btn-green" (click)="prevPage()" [disabled]="isPageIndexZero()">
-    ← Poprzednie
+    <span class="arrow">←</span> <span class="btn-text">Poprzednie</span>
   </button>
 
   <span class="pageInfo">Strona {{ getPageNumber() }}</span>
@@ -10,6 +10,6 @@
     (click)="nextPage()"
     [disabled]="isDisabledNext()"
   >
-    Następne →
+    <span class="btn-text">Następne</span> <span class="arrow">→</span>
   </button>
 </div>

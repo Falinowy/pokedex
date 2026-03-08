@@ -19,6 +19,9 @@ export class CardsPokemontcgFacade {
   private _selectedCard = signal<Card | null>(null);
   public selectedCard = this._selectedCard.asReadonly();
 
+  private _searchQuery = signal<string>('');
+  public searchQuery = this._searchQuery.asReadonly();
+
   private _isDetailLoading = signal<boolean>(true);
   public isDetailLoading = this._isDetailLoading.asReadonly();
   
@@ -33,14 +36,24 @@ export class CardsPokemontcgFacade {
 
   private similarCardsCache = new Map<string, Card[]>();
 
-  public normalizedCards = computed<NormalizedCard[]>(() => 
-    this._cards().map(c => ({
+  public normalizedCards = computed<NormalizedCard[]>(() => {
+    const query = this._searchQuery().toLowerCase();
+    const filtered = query 
+      ? this._cards().filter(c => c.name.toLowerCase().includes(query))
+      : this._cards();
+
+    return filtered.map(c => ({
       id: c.id,
       name: c.name,
       imageUrl: c.images?.small,
       routerLink: `/cards/pokemontcg/${c.id}/${c.types ? c.types[0] : ''}`
-    }))
-  );
+    }));
+  });
+
+  public pokemonNames = computed<string[]>(() => {
+    const names = this._cards().map(c => c.name);
+    return Array.from(new Set(names)).sort((a, b) => a.localeCompare(b));
+  });
 
   public normalizedSimilarCards = computed<NormalizedCard[]>(() => {
     const similar = this._similarCards() as any; 
@@ -48,7 +61,7 @@ export class CardsPokemontcgFacade {
     
     const start = this._similarPageIndex() * this._similarPageSize();
     const end = start + this._similarPageSize();
-    
+    console.log(end);
     return (similar as Card[]).slice(start, end).map(c => ({
       id: c.id,
       name: c.name,
@@ -90,6 +103,10 @@ export class CardsPokemontcgFacade {
 
   public changeSimilarPage(newPageIndex: number): void {
     this._similarPageIndex.set(newPageIndex);
+  }
+
+  public setSearchQuery(query: string): void {
+    this._searchQuery.set(query);
   }
 
   public loadSimilarCards(types: string): void {

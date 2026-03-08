@@ -5,6 +5,12 @@ import { MatProgressSpinnerModule } from '@angular/material/progress-spinner';
 import { RouterLink } from '@angular/router';
 import { ActionBarComponent } from '../../action-bar/action-bar.component';
 import { MatButtonModule } from '@angular/material/button';
+import { MatFormFieldModule } from '@angular/material/form-field';
+import { MatInputModule } from '@angular/material/input';
+import { MatIconModule } from '@angular/material/icon';
+import { MatAutocompleteModule } from '@angular/material/autocomplete';
+import { FormsModule } from '@angular/forms';
+import { computed } from '@angular/core';
 
 export interface NormalizedCard {
   id: string;
@@ -22,7 +28,12 @@ export interface NormalizedCard {
     MatProgressSpinnerModule,
     RouterLink,
     ActionBarComponent,
-    MatButtonModule
+    MatButtonModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatIconModule,
+    MatAutocompleteModule,
+    FormsModule
   ],
   templateUrl: './card-list.component.html',
   styleUrls: ['./card-list.component.scss'],
@@ -36,10 +47,22 @@ export class CardListComponent {
   public showSpinner = input<boolean>(false);
   public errorMessage = input<string | null>(null);
   public showSourceChangeButton = input<boolean>(false);
+  public searchQuery = input<string>('');
+  public allPokemonNames = input<string[]>([]);
+
+  public filteredNames = computed(() => {
+    const query = this.searchQuery().toLowerCase();
+    const names = this.allPokemonNames();
+    if (!query) return names.slice(0, 50);
+    return names
+      .filter(name => name.toLowerCase().includes(query))
+      .slice(0, 50);
+  });
 
   public pageChange = output<number>();
   public reload = output<void>();
   public sourceChange = output<void>();
+  public search = output<string>();
 
   onPageChange(newPage: number): void {
     this.pageChange.emit(newPage);
@@ -51,6 +74,10 @@ export class CardListComponent {
 
   onChangeSource(): void {
     this.sourceChange.emit();
+  }
+
+  onSearch(query: string): void {
+    this.search.emit(query);
   }
 }
 

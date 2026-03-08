@@ -26,6 +26,11 @@ export class CardsPokemontcgComponent implements OnInit {
     this.pageIndex = newPage;
   }
 
+  public onSearch(query: string): void {
+    this.facade.setSearchQuery(query);
+    this.pageIndex = 0;
+  }
+
   public goHome(): void {
     this.router
       .navigate([`/home`])

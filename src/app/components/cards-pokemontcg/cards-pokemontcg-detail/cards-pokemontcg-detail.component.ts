@@ -10,7 +10,6 @@ import {
 } from '@angular/forms';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { MatFormField, MatLabel, MatInput, MatError } from '@angular/material/input';
-import { MatButton } from '@angular/material/button';
 import { CardDetailComponent } from '../../shared/card-detail/card-detail.component';
 
 @Component({
@@ -24,7 +23,6 @@ import { CardDetailComponent } from '../../shared/card-detail/card-detail.compon
     MatLabel,
     MatInput,
     MatError,
-    MatButton,
     CardDetailComponent
   ],
 })

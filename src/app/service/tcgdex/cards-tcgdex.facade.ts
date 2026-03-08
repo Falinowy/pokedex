@@ -22,8 +22,16 @@ export class CardsTcgdexFacade {
   private _pageSize = signal<number>(10);
   public pageSize = this._pageSize.asReadonly();
 
+  private _searchQuery = signal<string>('');
+  public searchQuery = this._searchQuery.asReadonly();
+
   public validCards = computed<CardResume[]>(() => {
-    return this._allCards().filter(
+    const query = this._searchQuery().toLowerCase();
+    const filtered = query
+      ? this._allCards().filter(c => c.name.toLowerCase().includes(query))
+      : this._allCards();
+
+    return filtered.filter(
       card => card.name !== 'Unown' && card.image && !card.image.includes('undefined')
     );
   });
@@ -37,6 +45,11 @@ export class CardsTcgdexFacade {
       imageUrl: `${c.image}/low.png`,
       routerLink: `/cards/tcgdex/${c.id}`
     }));
+  });
+
+  public pokemonNames = computed<string[]>(() => {
+    const names = this._allCards().map(c => c.name);
+    return Array.from(new Set(names)).sort((a, b) => a.localeCompare(b));
   });
 
   private _selectedCard = signal<Card | null>(null);
@@ -79,6 +92,11 @@ export class CardsTcgdexFacade {
 
   public changePage(newPageIndex: number): void {
     this._pageIndex.set(newPageIndex);
+  }
+
+  public setSearchQuery(query: string): void {
+    this._searchQuery.set(query);
+    this._pageIndex.set(0);
   }
 
   public async loadAllCards(): Promise<void> {
